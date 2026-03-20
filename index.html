@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABC do Escorpião — Jogo Educativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════════
+       PALETA — extraída do screenshot do jogo
+    ══════════════════════════════════════════ */
+    :root {
+      --sky:        #6DC8F3;   /* azul céu */
+      --sky-dk:     #4AAEDA;
+      --grass:      #5BBB5B;   /* verde grama */
+      --grass-dk:   #3E9440;
+      --house:      #F5A32A;   /* amarelo-laranja da casa */
+      --house-dk:   #C97E10;
+      --roof:       #4A4F6A;   /* cinza-azul do telhado */
+      --box:        #D4A96A;   /* papelão */
+      --box-dk:     #A87840;
+      --road:       #9090A8;   /* asfalto */
+      --fence:      #9B6234;   /* madeira */
+      --red:        #E85555;   /* caminhão vermelho */
+      --paper:      #FFFBF0;   /* fundo papel */
+      --paper2:     #FFF5D6;
+      --outline:    #2A2640;   /* contorno canetinha */
+      --white:      #FFFFFF;
+      --text:       #2A2640;
+      --muted:      #6A6482;
+      --green-add:  #3DAB6A;
+      --red-del:    #D94545;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', 'Segoe UI', sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      /* fundo com bolinhas sutis estilo papel de jogo */
+      background-image: radial-gradient(circle, rgba(90,180,90,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* ─ utilitário: contorno canetinha ─ */
+    .ink {
+      border: 3px solid var(--outline);
+      box-shadow: 4px 4px 0 var(--outline);
+    }
+    .ink-sm {
+      border: 2.5px solid var(--outline);
+      box-shadow: 3px 3px 0 var(--outline);
+    }
+    .ink-lg {
+      border: 4px solid var(--outline);
+      box-shadow: 6px 6px 0 var(--outline);
+    }
+
+    /* ══════════ NAV ══════════ */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 200;
+      background: var(--sky);
+      border-bottom: 3px solid var(--outline);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand {
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 800; font-size: 1.25rem; color: var(--outline);
+      letter-spacing: 0.02em;
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.4);
+    }
+    .nav-links { display: flex; gap: 1.4rem; list-style: none; }
+    .nav-links a {
+      color: var(--outline); text-decoration: none; font-weight: 700;
+      font-size: 0.88rem; padding: 0.25rem 0.75rem; border-radius: 20px;
+      transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.35); }
+
+    /* ══════════ HERO ══════════ */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(
+        180deg,
+        var(--sky) 0%,
+        var(--sky) 55%,
+        var(--grass) 55%,
+        var(--grass-dk) 100%
+      );
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    /* nuvens decorativas */
+    .cloud {
+      position: absolute; background: var(--white);
+      border-radius: 50px;
+      border: 3px solid var(--outline);
+      opacity: 0.85;
+    }
+    .cloud::before, .cloud::after {
+      content: '';
+      position: absolute; background: var(--white);
+      border-radius: 50%;
+      border: 3px solid var(--outline);
+    }
+    .c1 { width: 120px; height: 40px; top: 14%; left: 8%; }
+    .c1::before { width: 60px; height: 60px; top: -30px; left: 15px; }
+    .c1::after  { width: 45px; height: 45px; top: -20px; left: 55px; }
+    .c2 { width: 100px; height: 35px; top: 20%; right: 10%; }
+    .c2::before { width: 50px; height: 50px; top: -25px; left: 10px; }
+    .c2::after  { width: 40px; height: 40px; top: -18px; left: 45px; }
+    .c3 { width: 80px; height: 28px; top: 10%; left: 40%; }
+    .c3::before { width: 40px; height: 40px; top: -20px; left: 8px; }
+    .c3::after  { width: 32px; height: 32px; top: -14px; left: 38px; }
+
+    /* sol */
+    .sun {
+      position: absolute; top: 8%; right: 18%;
+      width: 80px; height: 80px;
+      background: #FFD740;
+      border-radius: 50%;
+      border: 3px solid var(--outline);
+      box-shadow: 0 0 0 8px rgba(255,215,64,0.25), 4px 4px 0 var(--outline);
+    }
+
+    /* escorpião emoji hero */
+    .hero-scorpion {
+      font-size: 5rem; margin-bottom: 0.5rem;
+      filter: drop-shadow(3px 4px 0 var(--outline));
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--house);
+      border: 2.5px solid var(--outline);
+      box-shadow: 3px 3px 0 var(--outline);
+      color: var(--outline);
+      font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em;
+      padding: 0.3rem 1rem; border-radius: 100px;
+      margin-bottom: 1.2rem; text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 800; line-height: 1;
+      color: var(--white);
+      text-shadow:
+        4px 4px 0 var(--outline),
+        -1px -1px 0 var(--outline),
+         1px -1px 0 var(--outline),
+        -1px  1px 0 var(--outline),
+         1px  1px 0 var(--outline);
+      margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--white);
+      text-shadow: 1px 1px 0 rgba(42,38,64,0.5);
+      max-width: 520px; margin: 0 auto 2.5rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ══════════ BUTTONS ══════════ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 14px;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+      cursor: pointer; transition: transform .12s, box-shadow .12s;
+      border: 3px solid var(--outline);
+    }
+    .btn:active { transform: translate(3px,3px); box-shadow: none !important; }
+
+    .btn-primary {
+      background: var(--house);
+      color: var(--outline);
+      box-shadow: 4px 4px 0 var(--outline);
+    }
+    .btn-primary:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--outline); }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--outline);
+      box-shadow: 4px 4px 0 var(--outline);
+    }
+    .btn-secondary:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--outline); }
+
+    .btn-green {
+      background: var(--grass);
+      color: var(--white);
+      box-shadow: 4px 4px 0 var(--outline);
+    }
+    .btn-green:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--outline); }
+
+    /* ══════════ SECTIONS ══════════ */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      background: var(--grass);
+      color: var(--white); border: 2.5px solid var(--outline);
+      box-shadow: 2px 2px 0 var(--outline);
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.8rem; border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 800; margin-bottom: 0.7rem; color: var(--text);
+    }
+    .section-desc {
+      color: var(--muted); font-size: 1.05rem; font-weight: 600;
+      max-width: 600px; margin-bottom: 2.5rem;
+    }
+
+    /* ══════════ DOWNLOADS ══════════ */
+    #downloads { background: var(--paper2); border-top: 3px solid var(--outline); border-bottom: 3px solid var(--outline); }
+    .downloads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+    }
+    .dl-card {
+      background: var(--white); border-radius: 18px; padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: transform .15s;
+    }
+    .dl-card:hover { transform: translate(-2px,-2px); }
+    .dl-card:hover { box-shadow: 6px 6px 0 var(--outline) !important; }
+    .dl-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .dl-platform {
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 800; font-size: 1.1rem; margin-bottom: 0.3rem;
+    }
+    .dl-version { font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-bottom: 1.2rem; }
+    .dl-card .btn { width: 100%; justify-content: center; }
+    .dl-coming {
+      display: inline-block;
+      background: var(--paper2); color: var(--muted);
+      border: 2px solid var(--outline);
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+      padding: 0.4rem 1rem; border-radius: 8px; text-transform: uppercase;
+    }
+
+    /* ══════════ SOBRE ══════════ */
+    #sobre { background: var(--paper); }
+    .sobre-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+    .sobre-card {
+      background: var(--white); border-radius: 18px; padding: 1.75rem;
+    }
+    .sobre-card h3 {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.05rem; font-weight: 800;
+      color: var(--house-dk); margin-bottom: 0.5rem;
+    }
+    .sobre-card p { color: var(--muted); font-size: 0.95rem; font-weight: 600; line-height: 1.65; }
+
+    /* stripe decorativa entre seções */
+    .stripe {
+      height: 12px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--house) 0px, var(--house) 24px,
+        var(--grass) 24px, var(--grass) 48px,
+        var(--sky)   48px, var(--sky)   72px,
+        var(--red)   72px, var(--red)   96px
+      );
+      border-top: 3px solid var(--outline);
+      border-bottom: 3px solid var(--outline);
+    }
+
+    /* ══════════ ROTEIRO ══════════ */
+    #roteiro { background: var(--sky); border-top: 3px solid var(--outline); }
+    #roteiro .section-label { background: var(--house); color: var(--outline); }
+    #roteiro .section-title { color: var(--white); text-shadow: 2px 2px 0 var(--outline); }
+    #roteiro .section-desc  { color: rgba(255,255,255,0.85); }
+
+    .fase-timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .fase-timeline::before {
+      content: ''; position: absolute; left: 24px; top: 10px; bottom: 10px;
+      width: 4px; background: var(--outline); border-radius: 2px;
+    }
+
+    .fase-item { display: flex; gap: 1.5rem; position: relative; padding-bottom: 2rem; }
+    .fase-item:last-child { padding-bottom: 0; }
+
+    .fase-dot {
+      flex-shrink: 0; width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--house); color: var(--outline);
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+      border: 3px solid var(--outline);
+      box-shadow: 3px 3px 0 var(--outline);
+    }
+    .fase-dot.inter { background: var(--white); font-size: 1.2rem; }
+    .fase-dot.gameover { background: var(--red); color: var(--white); font-size: 1.1rem; }
+
+    .fase-content { flex: 1; padding-top: 0.35rem; }
+
+    .fase-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.15rem 0.6rem; border-radius: 6px;
+      margin-bottom: 0.35rem;
+      background: var(--house); color: var(--outline);
+      border: 2px solid var(--outline); box-shadow: 2px 2px 0 var(--outline);
+    }
+    .fase-tag.inter { background: var(--white); }
+    .fase-tag.gameover { background: var(--red); color: var(--white); }
+
+    .fase-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.15rem; font-weight: 800; margin-bottom: 0.45rem;
+      color: var(--white); text-shadow: 1px 1px 0 var(--outline);
+    }
+    .fase-body {
+      color: rgba(255,255,255,0.9); font-size: 0.93rem;
+      font-weight: 600; line-height: 1.65;
+    }
+
+    .dialogo {
+      background: var(--white);
+      border: 3px solid var(--outline); border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--outline);
+      padding: 1rem 1.25rem; margin-top: 0.75rem;
+      font-size: 0.87rem;
+    }
+    .dialogo-line { margin-bottom: 0.4rem; }
+    .dialogo-speaker { font-weight: 800; color: var(--house-dk); margin-right: 0.3rem; }
+    .dialogo-action { font-style: italic; color: var(--muted); }
+
+    details.dialogo-full { margin-top: 0.6rem; }
+    details.dialogo-full summary {
+      cursor: pointer; font-size: 0.82rem; font-weight: 700;
+      color: var(--grass-dk); padding: 0.3rem 0;
+      list-style: none; user-select: none;
+    }
+    details.dialogo-full summary::before { content: '▶ '; font-size: 0.7rem; }
+    details.dialogo-full[open] summary::before { content: '▼ '; }
+
+    /* ══════════ DIFF ══════════ */
+    #diff { background: var(--paper); border-top: 3px solid var(--outline); }
+
+    .diff-intro {
+      background: var(--paper2);
+      border: 3px solid var(--outline); border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--outline);
+      padding: 1.1rem 1.5rem; margin-bottom: 2rem;
+      font-size: 0.93rem; font-weight: 600; color: var(--muted);
+    }
+    .diff-intro strong { color: var(--text); }
+
+    .diff-legend { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .diff-legend span {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.83rem; font-weight: 700; color: var(--text);
+    }
+    .leg-dot { width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--outline); }
+
+    .diff-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+    .diff-block {
+      background: var(--white);
+      border: 3px solid var(--outline); border-radius: 16px;
+      box-shadow: 5px 5px 0 var(--outline);
+      overflow: hidden;
+    }
+    .diff-block-header {
+      padding: 0.75rem 1.25rem;
+      background: var(--grass);
+      border-bottom: 3px solid var(--outline);
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.92rem; font-weight: 800; color: var(--white);
+      text-shadow: 1px 1px 0 var(--outline);
+    }
+    .diff-cols { display: grid; grid-template-columns: 1fr 1fr; }
+    .diff-col { padding: 1.1rem 1.25rem; }
+    .diff-col + .diff-col { border-left: 3px solid var(--outline); }
+
+    .diff-col-label {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .diff-col-label.v1 { color: var(--red-del); }
+    .diff-col-label.v2 { color: var(--green-add); }
+    .diff-col-label::before {
+      content: ''; display: inline-block;
+      width: 10px; height: 10px; border-radius: 3px;
+      border: 2px solid var(--outline);
+    }
+    .diff-col-label.v1::before { background: var(--red-del); }
+    .diff-col-label.v2::before { background: var(--green-add); }
+
+    .diff-text { font-size: 0.88rem; font-weight: 600; line-height: 1.7; color: var(--muted); }
+    .diff-removed {
+      background: rgba(217,69,69,0.1);
+      border-left: 4px solid var(--red-del);
+      padding: 0.3rem 0.6rem; margin: 0.25rem 0;
+      border-radius: 0 6px 6px 0; color: var(--red-del);
+      text-decoration: line-through; opacity: 0.85;
+    }
+    .diff-added {
+      background: rgba(61,171,106,0.1);
+      border-left: 4px solid var(--green-add);
+      padding: 0.3rem 0.6rem; margin: 0.25rem 0;
+      border-radius: 0 6px 6px 0; color: var(--text);
+    }
+    .diff-note {
+      margin-top: 0.5rem; font-size: 0.8rem;
+      color: var(--muted); font-style: italic;
+    }
+
+    /* ══════════ FOOTER ══════════ */
+    footer {
+      background: var(--grass);
+      border-top: 4px solid var(--outline);
+      padding: 3rem 2rem; text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.8rem; font-weight: 800; color: var(--white);
+      text-shadow: 2px 2px 0 var(--outline);
+      margin-bottom: 0.5rem;
+    }
+    footer p { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 600; line-height: 1.7; }
+    footer a { color: var(--white); }
+    footer a:hover { text-decoration: underline; }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .sobre-grid { grid-template-columns: 1fr; }
+      .diff-cols { grid-template-columns: 1fr; }
+      .diff-col + .diff-col { border-left: none; border-top: 3px solid var(--outline); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <span class="nav-brand">🦂 ABC do Escorpião</span>
+  <ul class="nav-links">
+    <li><a href="#downloads">Download</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#roteiro">Roteiro</a></li>
+    <li><a href="#diff">Alterações</a></li>
+    <li><a href="https://github.com/juniormaniusis/abc_escorpiao" target="_blank">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="inicio">
+  <!-- decoração -->
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="sun"></div>
+
+  <div class="hero-badge">🎮 Jogo Sério Educativo</div>
+  <div class="hero-scorpion">🦂</div>
+  <h1>ABC do Escorpião</h1>
+  <p class="hero-sub">
+    Um jogo educativo para crianças de 5 a 10 anos sobre prevenção,
+    identificação e cuidados com acidentes por escorpião.
+  </p>
+  <div class="hero-actions">
+    <a href="#downloads" class="btn btn-primary">⬇ Baixar o Jogo</a>
+    <a href="#roteiro" class="btn btn-secondary">📜 Ver Roteiro</a>
+  </div>
+</section>
+
+<!-- ══════════ DOWNLOADS ══════════ -->
+<section id="downloads">
+  <div class="container">
+    <p class="section-label">📦 Releases</p>
+    <h2 class="section-title">Baixar o Jogo</h2>
+    <p class="section-desc">
+      Escolha a versão para a sua plataforma. Os links serão disponibilizados em breve!
+    </p>
+    <div class="downloads-grid">
+
+      <div class="dl-card ink">
+        <div class="dl-icon">🪟</div>
+        <div class="dl-platform">Windows</div>
+        <div class="dl-version">Em breve</div>
+        <span class="dl-coming">Em breve</span>
+      </div>
+
+      <div class="dl-card ink">
+        <div class="dl-icon">🍎</div>
+        <div class="dl-platform">macOS</div>
+        <div class="dl-version">Em breve</div>
+        <span class="dl-coming">Em breve</span>
+      </div>
+
+      <div class="dl-card ink">
+        <div class="dl-icon">🐧</div>
+        <div class="dl-platform">Linux</div>
+        <div class="dl-version">Em breve</div>
+        <span class="dl-coming">Em breve</span>
+      </div>
+
+      <div class="dl-card ink">
+        <div class="dl-icon">📱</div>
+        <div class="dl-platform">Android</div>
+        <div class="dl-version">Em breve</div>
+        <span class="dl-coming">Em breve</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ══════════ SOBRE ══════════ -->
+<section id="sobre">
+  <div class="container">
+    <p class="section-label">🏠 O Jogo</p>
+    <h2 class="section-title">Sobre o ABC do Escorpião</h2>
+    <p class="section-desc">
+      Um jogo sério desenvolvido para ensinar crianças a identificar,
+      prevenir e reagir corretamente a situações de risco com escorpiões.
+    </p>
+    <div class="sobre-grid">
+      <div class="sobre-card ink">
+        <h3>🎯 Objetivo</h3>
+        <p>Conscientizar crianças entre 5 e 10 anos sobre os perigos dos escorpiões, ensinando boas práticas de prevenção e os passos corretos em caso de acidente.</p>
+      </div>
+      <div class="sobre-card ink">
+        <h3>👦 Personagem principal</h3>
+        <p>André — carinhosamente chamado de Dedé ou Dézinho — guia o jogador por um bairro urbano, enfrentando situações reais envolvendo escorpiões.</p>
+      </div>
+      <div class="sobre-card ink">
+        <h3>🗺️ 4 Fases</h3>
+        <p>Cobrem o ciclo completo: encontro com o animal, prevenção no quintal, primeiros socorros e notificação ao setor de controle de vetores.</p>
+      </div>
+      <div class="sobre-card ink">
+        <h3>🔬 Base científica</h3>
+        <p>Desenvolvido no contexto de pesquisa de Mestrado em Computação, alinhado às diretrizes de saúde pública e do controle de zoonoses municipais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ══════════ ROTEIRO ══════════ -->
+<section id="roteiro">
+  <div class="container">
+    <p class="section-label">📜 Roteiro</p>
+    <h2 class="section-title">História do Jogo</h2>
+    <p class="section-desc">
+      A narrativa segue André em sua chegada a uma casa nova, passando por quatro fases educativas.
+    </p>
+
+    <div class="fase-timeline">
+
+      <!-- FASE 1 -->
+      <div class="fase-item">
+        <div class="fase-dot">1</div>
+        <div class="fase-content">
+          <span class="fase-tag">Fase 1</span>
+          <div class="fase-title">Casa e Quintal — O Encontro 🏠</div>
+          <div class="fase-body">
+            André acaba de se mudar para uma casa nova. A missão inicial é organizar os
+            brinquedos no quarto. Ao finalizar, ele se depara com um escorpião escondido
+            no armário. O pai explica o que fazer, como capturar corretamente e por que
+            o animal é perigoso para crianças. Ao final, um quiz testa o que André aprendeu.
+          </div>
+          <div class="dialogo">
+            <div class="dialogo-line"><span class="dialogo-speaker">[7] Pai:</span> Cuidado! É um escorpião! Não toque nele.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[10] Pai:</span> Não! Com escorpião não se brinca! Para capturar é importante usar uma pinça longa ou prender com um pote.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[12] Pai:</span> Esse bichinho pode ser pequeno, do tamanho de uma tampinha, mas a picada é venenosa e pode matar, principalmente crianças.</div>
+            <details class="dialogo-full">
+              <summary>Ver diálogo completo da Fase 1</summary>
+              <div style="margin-top:0.75rem;">
+                <div class="dialogo-line"><span class="dialogo-speaker">[1] André:</span> Mamãe! Posso ir brincar lá fora?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[2] Mãe:</span> Você pode ir depois que organizar seus brinquedos.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[4] André:</span> Ahhhhhhhhh <span class="dialogo-action">[grito]</span></div>
+                <div class="dialogo-line"><span class="dialogo-action">[barulho do pai correndo — Pai aparece na porta do quarto]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[5] Pai:</span> O que foi?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[6] André:</span> Tem um bicho aqui.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[7] Pai:</span> Cuidado! É um escorpião! Não toque nele.</div>
+                <div class="dialogo-line"><span class="dialogo-action">[Pai captura o escorpião]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[8] Pai:</span> Acabei de capturar um escorpião do seu quarto. Temos que notificar a Unidade de Vigilância de Zoonoses do município.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[9] André:</span> Nossa. Posso brincar com ele?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[10] Pai:</span> Não! Com escorpião não se brinca! Use sempre uma pinça longa ou pote para capturar.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[14] Pai:</span> Escorpião mata! Sempre que avistar um, chame um adulto na hora. Entendido?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[15] André:</span> Sim, entendi.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[16] Pai (quiz):</span> Se você for picado, qual a primeira coisa a fazer?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[16.2] André ✅:</span> Procurar atendimento médico imediatamente.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[16.4] André ❌:</span> Colocar gelo. <span class="dialogo-action">[errado — não passar nada na picada]</span></div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTRE 1 e 2 -->
+      <div class="fase-item">
+        <div class="fase-dot inter">→</div>
+        <div class="fase-content">
+          <span class="fase-tag inter">Transição</span>
+          <div class="fase-title">André vai brincar lá fora</div>
+          <div class="fase-body">Com o aprendizado da Fase 1, André sai para brincar e encontra o vizinho Paulo.</div>
+        </div>
+      </div>
+
+      <!-- FASE 2 -->
+      <div class="fase-item">
+        <div class="fase-dot">2</div>
+        <div class="fase-content">
+          <span class="fase-tag">Fase 2</span>
+          <div class="fase-title">Limpeza do Quintal — Prevenção 🧹</div>
+          <div class="fase-body">
+            O vizinho Paulo explica por que escorpiões proliferam em cidades e como criadouros
+            se formam. André aprende que veneno e queimadas não funcionam — limpar o quintal,
+            retirar entulho e preservar predadores naturais (como sapos) é o caminho certo.
+            O pai realiza a limpeza enquanto André observa com segurança.
+          </div>
+          <div class="dialogo">
+            <div class="dialogo-line"><span class="dialogo-speaker">[21] Paulo:</span> Esses bichos adoram comer baratas. E como na cidade tem barata pra todo lado, não é surpresa encontrá-los em pedras, entulho ou frestas dentro de casa.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[27] Paulo:</span> Não jogue veneno — isso não funciona. Só tira os escorpiões do lugar e fica mais perigoso ainda.</div>
+            <details class="dialogo-full">
+              <summary>Ver diálogo completo da Fase 2</summary>
+              <div style="margin-top:0.75rem;">
+                <div class="dialogo-line"><span class="dialogo-speaker">[17] Paulo:</span> Bom dia! Você acabou de se mudar, certo? Sou seu vizinho, Paulo.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[25] Paulo:</span> Sujeira, lixo, caixas, madeiras e entulhos num canto do quintal — isso é o local ideal para os escorpiões.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[29] Paulo:</span> Além de limpar o quintal, temos que manter os inimigos naturais dos escorpiões. Esses bichos são resistentes a veneno — só vai tirá-los do lugar.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[31] Paulo:</span> Sempre use sapato fechado e luvas ao limpar. E sempre junto com um adulto.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">[33.3] André:</span> Que bom, pai! Assim prevenimos criadouros de escorpiões! Vou chamar o Charlinho para brincar.</div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTRE 2 e 3 -->
+      <div class="fase-item">
+        <div class="fase-dot inter">→</div>
+        <div class="fase-content">
+          <span class="fase-tag inter">Transição</span>
+          <div class="fase-title">André chama Charlinho para brincar</div>
+          <div class="fase-body">O amigo Charlinho chega para brincar no quintal já limpo.</div>
+        </div>
+      </div>
+
+      <!-- FASE 3 -->
+      <div class="fase-item">
+        <div class="fase-dot">3</div>
+        <div class="fase-content">
+          <span class="fase-tag">Fase 3</span>
+          <div class="fase-title">Aconteceu a Picada! E Agora? 🚑</div>
+          <div class="fase-body">
+            O Charlinho é picado por um escorpião. André precisa agir rápido: capturar o
+            animal se possível e correr para atendimento. A missão é uma corrida contra o
+            tempo — primeiro tenta uma unidade especializada (longe demais) e depois o
+            pronto-socorro mais próximo. Ao final, o médico orienta sobre notificar o
+            setor de controle de vetores.
+          </div>
+          <div class="dialogo">
+            <div class="dialogo-line"><span class="dialogo-speaker">[37] André:</span> O escorpião picou o Charlinho!</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[41] André:</span> Se der, vamos capturar ele e levar o mais rápido possível para uma unidade de saúde especializada.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[47] Médico:</span> Parabéns! Você agiu rápido. Se não fosse por você o quadro poderia ser bem mais grave.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[49] Médico:</span> Toda vez que acontece a picada é importante avisar o setor de controle de vetores.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME OVER -->
+      <div class="fase-item">
+        <div class="fase-dot gameover">💀</div>
+        <div class="fase-content">
+          <span class="fase-tag gameover">Game Over</span>
+          <div class="fase-title">Fim de Jogo</div>
+          <div class="fase-body">
+            Ativado se o jogador tomar decisões erradas: tentar matar o escorpião,
+            passar pomada na picada, ou não chegar a tempo ao atendimento.
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTRE 3 e 4 -->
+      <div class="fase-item">
+        <div class="fase-dot inter">→</div>
+        <div class="fase-content">
+          <span class="fase-tag inter">Transição</span>
+          <div class="fase-title">André vai notificar a ocorrência</div>
+          <div class="fase-body">Maçãs guiam André até o setor de controle de zoonoses.</div>
+        </div>
+      </div>
+
+      <!-- FASE 4 -->
+      <div class="fase-item">
+        <div class="fase-dot">4</div>
+        <div class="fase-content">
+          <span class="fase-tag">Fase 4</span>
+          <div class="fase-title">Avisar sobre a Ocorrência 📋</div>
+          <div class="fase-body">
+            André registra a picada no setor de controle de vetores. O agente aplica um
+            quiz final: o escorpião ataca? Ele usa todo o veneno de uma vez? Quais são
+            seus predadores naturais? André consolida todo o aprendizado do jogo.
+          </div>
+          <div class="dialogo">
+            <div class="dialogo-line"><span class="dialogo-speaker">[59] Agente:</span> O escorpião ataca?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[64] Agente:</span> Só vai ferroar pra se defender se alguém encostar nele — intencionalmente ou sem querer.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[70] Agente:</span> O escorpião pode dar uma "picada seca" — picar sem usar veneno.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">[77] Agente:</span> Sapos, lacraias, corujas, camundongos e lagartos — animais noturnos — são ótimos predadores para os escorpiões.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /fase-timeline -->
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<!-- ══════════ DIFF ══════════ -->
+<section id="diff">
+  <div class="container">
+    <p class="section-label">✏️ Alterações</p>
+    <h2 class="section-title">Diff: Versão 1 → Versão 2</h2>
+    <p class="section-desc">
+      Comparativo entre a Versão 1 (até 10/04/2025) e a Versão 2 (a partir de 11/04/2025).
+    </p>
+
+    <div class="diff-intro">
+      <strong>Contexto:</strong> A segunda versão incorpora feedbacks de avaliação especializada,
+      tornando os diálogos mais precisos e adicionando elementos de quiz para reforço do aprendizado ativo.
+    </div>
+
+    <div class="diff-legend">
+      <span><span class="leg-dot" style="background:var(--red-del)"></span> Removido (V1)</span>
+      <span><span class="leg-dot" style="background:var(--green-add)"></span> Adicionado (V2)</span>
+    </div>
+
+    <div class="diff-grid">
+
+      <div class="diff-block">
+        <div class="diff-block-header">Fala [8] — Pai captura o escorpião</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text"><div class="diff-removed">"Pronto. Ainda bem que consegui capturar ele, senão teríamos temos que notificar a unidade de saúde ou a Unidade de Vigilância... Mas como já capturei posso levar até uma unidade notificante..."</div></div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">"Acabei de capturar um escorpião do seu quarto. Temos que notificar a Unidade de Vigilância de Zoonoses do município."</div>
+              <p class="diff-note">Mensagem simplificada e direta. Elimina redundância e hesitação.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-block">
+        <div class="diff-block-header">Fala [12] — Vocabulário para crianças</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text"><div class="diff-removed">"...ele <strong>se camufla</strong> bem..."</div></div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">"...ele <strong>se esconde</strong> bem..."</div>
+              <p class="diff-note">Vocabulário simplificado para o público-alvo de 5–10 anos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-block">
+        <div class="diff-block-header">Falas [16–16.7] — Quiz adicionado ao final da Fase 1</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text"><div class="diff-removed">Ausente. O pai simplesmente libera André para sair após a conversa.</div></div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">Quiz inserido: 3 opções de resposta sobre o que fazer em caso de picada. Respostas erradas corrigidas com orientação.</div>
+              <p class="diff-note">Reforça aprendizado ativo logo ao fim da Fase 1.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-block">
+        <div class="diff-block-header">Fase 2 — Missão de limpeza do quintal</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text"><div class="diff-removed">Inclui mecânica de busca de equipamentos (luvas e botas na mochila). André precisa encontrar os itens antes do pai iniciar a limpeza.</div></div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">Mecânica de busca removida. O pai já está no quintal e inicia diretamente. Novo diálogo de conclusão [33.1–33.3] mais fluido.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-block">
+        <div class="diff-block-header">Fase 3 — Quem foi picado e primeiro socorro</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text">
+              <div class="diff-removed">"O escorpião picou <strong>o bebê</strong>!"</div>
+              <div class="diff-removed">Adulto diz: "Vou passar uma pomada para diminuir a dor."</div>
+            </div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">"O escorpião picou <strong>o Charlinho</strong>!" — personagem já apresentado, gerando continuidade narrativa.</div>
+              <div class="diff-added">Fala da pomada removida — reforça a orientação correta de não aplicar nada na picada.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-block">
+        <div class="diff-block-header">Fase 4 — Renomeação e novo foco</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text"><div class="diff-removed">Chamada "Evitando acidentes" / "Controle de zoonoses". Focada em limpeza de ambiente pelo agente (aspirador, pinça, lanterna de luz negra).</div></div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">Renomeada para <strong>"Avisar sobre a ocorrência da picada"</strong>. Foco em notificação e quiz sobre comportamento do escorpião (ataque, picada seca, predadores naturais).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-block">
+        <div class="diff-block-header">Fala [29] Paulo — Veneno e queimada</div>
+        <div class="diff-cols">
+          <div class="diff-col">
+            <div class="diff-col-label v1">Versão 1</div>
+            <div class="diff-text"><div class="diff-removed">"...esses bichos são resistentes <strong>a queimadas e</strong> a veneno! Fazer isso não vai matar os escorpiões..."</div></div>
+          </div>
+          <div class="diff-col">
+            <div class="diff-col-label v2">Versão 2</div>
+            <div class="diff-text">
+              <div class="diff-added">"...esses bichos são resistentes a veneno! Jogar venenos não vai matar os escorpiões..."</div>
+              <p class="diff-note">Referência a queimadas removida — simplificação para o contexto urbano.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-brand">🦂 ABC do Escorpião</div>
+  <p>
+    Desenvolvido como parte de pesquisa de Mestrado em Computação.<br/>
+    Código-fonte disponível no
+    <a href="https://github.com/juniormaniusis/abc_escorpiao" target="_blank">GitHub ↗</a>.
+  </p>
+</footer>
+
+</body>
+</html>
