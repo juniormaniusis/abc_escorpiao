@@ -99,19 +99,15 @@
     </p>
     <div class="sobre-grid">
       <div class="sobre-card ink">
-        <h3>🎯 Objetivo</h3>
+        <h3>Objetivo</h3>
         <p>Conscientizar crianças entre 5 e 10 anos sobre os perigos dos escorpiões, ensinando boas práticas de prevenção e os passos corretos em caso de acidente.</p>
       </div>
       <div class="sobre-card ink">
-        <h3>👦 Personagem principal</h3>
-        <p>André — carinhosamente chamado de Dedé ou Dézinho — guia o jogador por um bairro urbano, enfrentando situações reais envolvendo escorpiões.</p>
+        <h3>Personagem principal</h3>
+        <p>André guia o jogador por um bairro urbano, enfrentando situações reais envolvendo escorpiões.</p>
       </div>
       <div class="sobre-card ink">
-        <h3>🗺️ 4 Fases</h3>
-        <p>Cobrem o ciclo completo: encontro com o animal, prevenção no quintal, primeiros socorros e notificação ao setor de controle de vetores.</p>
-      </div>
-      <div class="sobre-card ink">
-        <h3>🔬 Base científica</h3>
+        <h3>Base científica</h3>
         <p>Desenvolvido no contexto de pesquisa de Mestrado em Computação, alinhado às diretrizes de saúde pública e do controle de zoonoses municipais.</p>
       </div>
     </div>
@@ -131,41 +127,54 @@
 
     <div class="fase-timeline">
 
+      <!-- TUTORIAL -->
+      <div class="fase-item">
+        <div class="fase-dot inter">▶</div>
+        <div class="fase-content">
+          <span class="fase-tag inter">Tutorial</span>
+          <div class="fase-title">Início da Aventura</div>
+          <div class="fase-body">
+            O jogo ensina os controles básicos: mover o mouse para olhar ao redor, WASD para movimentar
+            André e a tecla E para interagir com objetos e portas.
+          </div>
+        </div>
+      </div>
+
       <!-- FASE 1 -->
       <div class="fase-item">
         <div class="fase-dot">1</div>
         <div class="fase-content">
           <span class="fase-tag">Fase 1</span>
-          <div class="fase-title">Casa e Quintal — O Encontro 🏠</div>
+          <div class="fase-title">Casa e Quintal — O Encontro</div>
           <div class="fase-body">
-            André acaba de se mudar para uma casa nova. A missão inicial é organizar os
-            brinquedos no quarto. Ao finalizar, ele se depara com um escorpião escondido
-            no armário. O pai explica o que fazer, como capturar corretamente e por que
-            o animal é perigoso para crianças. Ao final, um quiz testa o que André aprendeu.
+            André quer sair para brincar, mas precisa primeiro guardar os brinquedos no quarto.
+            Ao terminar, depara-se com um escorpião recém-capturado pelo pai. O pai explica os
+            perigos, como agir corretamente e orienta André com um quiz sobre o que fazer em
+            caso de picada.
           </div>
           <div class="dialogo">
-            <div class="dialogo-line"><span class="dialogo-speaker">[7] Pai:</span> Cuidado! É um escorpião! Não toque nele.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[10] Pai:</span> Não! Com escorpião não se brinca! Para capturar é importante usar uma pinça longa ou prender com um pote.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[12] Pai:</span> Esse bichinho pode ser pequeno, do tamanho de uma tampinha, mas a picada é venenosa e pode matar, principalmente crianças.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Nossa! Posso brincar com ele?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Não! Com escorpião não se brinca! E só adultos podem tentar capturá-lo, usando uma pinça comprida ou um pote com tampa, para não precisar tocar no bicho com a mão.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Esse bichinho é pequeno, mais ou menos do tamanho de uma tampinha de garrafa. Com as cores amarelo e marrom, ele se esconde muito bem. E ele sai à noite, o que torna ainda mais difícil de ver. A picada dele é venenosa e pode ser muito perigosa, especialmente para crianças.</div>
             <details class="dialogo-full">
               <summary>Ver diálogo completo da Fase 1</summary>
               <div style="margin-top:0.75rem;">
-                <div class="dialogo-line"><span class="dialogo-speaker">[1] André:</span> Mamãe! Posso ir brincar lá fora?</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[2] Mãe:</span> Você pode ir depois que organizar seus brinquedos.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[4] André:</span> Ahhhhhhhhh <span class="dialogo-action">[grito]</span></div>
-                <div class="dialogo-line"><span class="dialogo-action">[barulho do pai correndo — Pai aparece na porta do quarto]</span></div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[5] Pai:</span> O que foi?</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[6] André:</span> Tem um bicho aqui.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[7] Pai:</span> Cuidado! É um escorpião! Não toque nele.</div>
-                <div class="dialogo-line"><span class="dialogo-action">[Pai captura o escorpião]</span></div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[8] Pai:</span> Acabei de capturar um escorpião do seu quarto. Temos que notificar a Unidade de Vigilância de Zoonoses do município.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[9] André:</span> Nossa. Posso brincar com ele?</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[10] Pai:</span> Não! Com escorpião não se brinca! Use sempre uma pinça longa ou pote para capturar.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[14] Pai:</span> Escorpião mata! Sempre que avistar um, chame um adulto na hora. Entendido?</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[15] André:</span> Sim, entendi.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[16] Pai (quiz):</span> Se você for picado, qual a primeira coisa a fazer?</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[16.2] André ✅:</span> Procurar atendimento médico imediatamente.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[16.4] André ❌:</span> Colocar gelo. <span class="dialogo-action">[errado — não passar nada na picada]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Mamãe! Posso ir brincar lá fora?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Mãe:</span> Pode ir depois de organizar seus brinquedos. Sobe até seu quarto e guarda tudo na prateleira, combinado?</div>
+                <div class="dialogo-line"><span class="dialogo-action">[André tenta sair sem guardar os brinquedos]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Mãe:</span> Ei! Termina de guardar os brinquedos primeiro, antes de sair para brincar.</div>
+                <div class="dialogo-line"><span class="dialogo-action">[André termina de guardar os brinquedos]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Mãe:</span> Ótimo! Agora pode ir brincar lá fora.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Isso é muito sério! Então nunca brinque com escorpião. Sempre que ver um, ou se alguém for picado, chame um adulto na hora. Entendido?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Sim, entendi.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai (quiz):</span> Ótimo! Agora me diz: se você ou alguma criança for picada por um escorpião, qual é a primeira coisa que deve ser feita?</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André ✅:</span> Procurar atendimento numa unidade de saúde.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André ❌:</span> Colocar gelo no lugar da picada. <span class="dialogo-action">[errado]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André ❌:</span> Passar uma pomada na picada. <span class="dialogo-action">[errado]</span></div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai (resposta certa):</span> Isso mesmo! Temos que correr para um Pronto Socorro ou Hospital. Esses lugares têm o tratamento certo para picada de escorpião. Posto de Saúde não tem esse atendimento, então é importante ir ao lugar certo.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai (resposta errada):</span> Não coloque nada na picada! O mais importante é procurar atendimento num hospital ou Pronto Socorro especializado em acidentes com escorpião.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Acabei de pegar um escorpião que estava aqui no seu quarto. Precisamos avisar o pessoal da prefeitura que cuida dos animais perigosos — a vigilância de zoonoses.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> O mais importante é chegar rápido ao hospital! Não pode demorar mais de uma hora e meia depois da picada, principalmente se for criança, porque quanto mais tempo passa, mais perigoso fica. Qualquer Pronto Socorro vai saber o que fazer e vai encaminhar para o tratamento certo.</div>
               </div>
             </details>
           </div>
@@ -177,8 +186,8 @@
         <div class="fase-dot inter">→</div>
         <div class="fase-content">
           <span class="fase-tag inter">Transição</span>
-          <div class="fase-title">André vai brincar lá fora</div>
-          <div class="fase-body">Com o aprendizado da Fase 1, André sai para brincar e encontra o vizinho Paulo.</div>
+          <div class="fase-title">André vai até a rua</div>
+          <div class="fase-body">André sai para brincar e encontra o vizinho Paulo na rua.</div>
         </div>
       </div>
 
@@ -187,24 +196,29 @@
         <div class="fase-dot">2</div>
         <div class="fase-content">
           <span class="fase-tag">Fase 2</span>
-          <div class="fase-title">Limpeza do Quintal — Prevenção 🧹</div>
+          <div class="fase-title">Prevenção — Vizinho Paulo e Limpeza do Quintal</div>
           <div class="fase-body">
-            O vizinho Paulo explica por que escorpiões proliferam em cidades e como criadouros
-            se formam. André aprende que veneno e queimadas não funcionam — limpar o quintal,
-            retirar entulho e preservar predadores naturais (como sapos) é o caminho certo.
+            O vizinho Paulo explica por que escorpiões proliferam nas cidades e como criadouros
+            se formam. André aprende que veneno não funciona e que limpar o quintal é a solução.
             O pai realiza a limpeza enquanto André observa com segurança.
           </div>
           <div class="dialogo">
-            <div class="dialogo-line"><span class="dialogo-speaker">[21] Paulo:</span> Esses bichos adoram comer baratas. E como na cidade tem barata pra todo lado, não é surpresa encontrá-los em pedras, entulho ou frestas dentro de casa.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[27] Paulo:</span> Não jogue veneno — isso não funciona. Só tira os escorpiões do lugar e fica mais perigoso ainda.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Esses bichinhos existem em todo o país, mas aprenderam a viver nas cidades, perto das pessoas. O motivo é simples: eles adoram comer baratas! E nas cidades tem barata pra todo lado.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Não jogue veneno nos escorpiões, porque isso não funciona! O veneno só tira eles do esconderijo e aí fica ainda mais perigoso, porque eles ficam soltos por aí.</div>
             <details class="dialogo-full">
               <summary>Ver diálogo completo da Fase 2</summary>
               <div style="margin-top:0.75rem;">
-                <div class="dialogo-line"><span class="dialogo-speaker">[17] Paulo:</span> Bom dia! Você acabou de se mudar, certo? Sou seu vizinho, Paulo.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[25] Paulo:</span> Sujeira, lixo, caixas, madeiras e entulhos num canto do quintal — isso é o local ideal para os escorpiões.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[29] Paulo:</span> Além de limpar o quintal, temos que manter os inimigos naturais dos escorpiões. Esses bichos são resistentes a veneno — só vai tirá-los do lugar.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[31] Paulo:</span> Sempre use sapato fechado e luvas ao limpar. E sempre junto com um adulto.</div>
-                <div class="dialogo-line"><span class="dialogo-speaker">[33.3] André:</span> Que bom, pai! Assim prevenimos criadouros de escorpiões! Vou chamar o Charlinho para brincar.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Bom dia, meu jovem! Você acabou de se mudar para a casa ao lado, certo? Sou seu vizinho, Paulo.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Ah, sim. Infelizmente esses bichos têm causado muitos acidentes por aqui. Algumas picadas são muito perigosas e podem ser até mortais se a pessoa não for atendida a tempo.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Por isso não é difícil encontrar escorpião escondido entre pedras, entulho — que são restos de obra — ou até saindo dos ralos dentro de casa.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Para acabar com os escorpiões, é preciso limpar o quintal, tirar toda a sujeira e o entulho acumulado. E também ajuda ter por perto os inimigos naturais dos escorpiões. Mas lembre: esses bichos são resistentes a veneno! Jogar veneno não vai matá-los, vai apenas tirar eles do esconderijo e pode causar mais acidentes.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Paulo:</span> Ótimo! Limpar o quintal é sempre o primeiro passo. Mas não se esqueça de usar sapato fechado e luvas quando for fazer isso. E sempre faça junto com um adulto!</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Legal! Vou falar com meu pai pra gente limpar o quintal.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Pai, a gente precisa limpar o quintal pra evitar escorpiões!</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Você tem razão, filho. Agora fique de olho, mas fica longe para nenhum escorpião chegar perto de você e te picar.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Boa notícia, filho! Acabei de limpar o quintal!</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Que bom, pai! Assim a gente evita que os escorpiões se escondam aqui perto!</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Pai:</span> Vou chamar o Charlinho para brincar e contar sobre o escorpião.</div>
               </div>
             </details>
           </div>
@@ -216,7 +230,7 @@
         <div class="fase-dot inter">→</div>
         <div class="fase-content">
           <span class="fase-tag inter">Transição</span>
-          <div class="fase-title">André chama Charlinho para brincar</div>
+          <div class="fase-title">Charlinho chega para brincar</div>
           <div class="fase-body">O amigo Charlinho chega para brincar no quintal já limpo.</div>
         </div>
       </div>
@@ -226,19 +240,19 @@
         <div class="fase-dot">3</div>
         <div class="fase-content">
           <span class="fase-tag">Fase 3</span>
-          <div class="fase-title">Aconteceu a Picada! E Agora? 🚑</div>
+          <div class="fase-title">Aconteceu a Picada!</div>
           <div class="fase-body">
-            O Charlinho é picado por um escorpião. André precisa agir rápido: capturar o
-            animal se possível e correr para atendimento. A missão é uma corrida contra o
-            tempo — primeiro tenta uma unidade especializada (longe demais) e depois o
-            pronto-socorro mais próximo. Ao final, o médico orienta sobre notificar o
-            setor de controle de vetores.
+            O Charlinho é picado por um escorpião no quintal. O pai do Charlinho aparece em
+            pânico. André precisa decidir como agir: capturar o escorpião com um pote se possível
+            e correr para o hospital mais próximo.
           </div>
           <div class="dialogo">
-            <div class="dialogo-line"><span class="dialogo-speaker">[37] André:</span> O escorpião picou o Charlinho!</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[41] André:</span> Se der, vamos capturar ele e levar o mais rápido possível para uma unidade de saúde especializada.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[47] Médico:</span> Parabéns! Você agiu rápido. Se não fosse por você o quadro poderia ser bem mais grave.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[49] Médico:</span> Toda vez que acontece a picada é importante avisar o setor de controle de vetores.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">André:</span> O escorpião picou o Charlinho!</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Pai do Charlinho:</span> Ai meu Deus! Mata esse bicho antes que pique de novo!</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">André:</span> A gente precisa matar o escorpião? Mas como?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">André ✅:</span> Se der, vamos capturar ele com um pote e levar junto para o hospital o mais rápido possível!</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Se o hospital especializado for muito longe, a gente vai para o Pronto Socorro ou Hospital mais perto!</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Pai do Charlinho:</span> Certo, vamos!</div>
           </div>
         </div>
       </div>
@@ -251,7 +265,27 @@
           <div class="fase-title">Fim de Jogo</div>
           <div class="fase-body">
             Ativado se o jogador tomar decisões erradas: tentar matar o escorpião,
-            passar pomada na picada, ou não chegar a tempo ao atendimento.
+            colocar gelo ou pomada na picada, ou não chegar a tempo ao atendimento.
+          </div>
+        </div>
+      </div>
+
+      <!-- QUIZ NA AMBULÂNCIA -->
+      <div class="fase-item">
+        <div class="fase-dot inter">🚑</div>
+        <div class="fase-content">
+          <span class="fase-tag inter">Ambulância</span>
+          <div class="fase-title">Quiz na Ambulância</div>
+          <div class="fase-body">
+            Durante o trajeto ao hospital, o narrador da ambulância faz perguntas educativas
+            sobre escorpiões. O jogador deve responder corretamente para consolidar o aprendizado.
+          </div>
+          <div class="dialogo">
+            <div class="dialogo-line"><span class="dialogo-speaker">Ambulância:</span> Devemos sacudir roupas e sapatos antes de usar?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Ambulância:</span> Escorpiões gostam de se esconder em entulhos e restos de obra?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Ambulância:</span> O escorpião gosta de comer baratas?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Ambulância:</span> O escorpião é um animal de hábitos diurnos — ou seja, gosta de sair durante o dia?</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Ambulância:</span> É verdade que a picada de escorpião pode levar à morte?</div>
           </div>
         </div>
       </div>
@@ -261,8 +295,8 @@
         <div class="fase-dot inter">→</div>
         <div class="fase-content">
           <span class="fase-tag inter">Transição</span>
-          <div class="fase-title">André vai notificar a ocorrência</div>
-          <div class="fase-body">Maçãs guiam André até o setor de controle de zoonoses.</div>
+          <div class="fase-title">Chegada ao hospital</div>
+          <div class="fase-body">A ambulância chega ao hospital. André fala com a atendente e em seguida vai notificar o agente de zoonoses.</div>
         </div>
       </div>
 
@@ -271,17 +305,27 @@
         <div class="fase-dot">4</div>
         <div class="fase-content">
           <span class="fase-tag">Fase 4</span>
-          <div class="fase-title">Avisar sobre a Ocorrência 📋</div>
+          <div class="fase-title">Hospital e Agente de Zoonoses</div>
           <div class="fase-body">
-            André registra a picada no setor de controle de vetores. O agente aplica um
-            quiz final: o escorpião ataca? Ele usa todo o veneno de uma vez? Quais são
-            seus predadores naturais? André consolida todo o aprendizado do jogo.
+            A atendente do hospital elogia a rapidez de André e orienta sobre notificar a vigilância
+            de zoonoses. André então vai ao setor e, com o agente, consolida o aprendizado sobre
+            o comportamento do escorpião e seus inimigos naturais.
           </div>
           <div class="dialogo">
-            <div class="dialogo-line"><span class="dialogo-speaker">[59] Agente:</span> O escorpião ataca?</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[64] Agente:</span> Só vai ferroar pra se defender se alguém encostar nele — intencionalmente ou sem querer.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[70] Agente:</span> O escorpião pode dar uma "picada seca" — picar sem usar veneno.</div>
-            <div class="dialogo-line"><span class="dialogo-speaker">[77] Agente:</span> Sapos, lacraias, corujas, camundongos e lagartos — animais noturnos — são ótimos predadores para os escorpiões.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Atendente do hospital:</span> Parabéns! Você agiu muito rápido. Se não fosse por você, a situação poderia ser muito mais grave.</div>
+            <div class="dialogo-line"><span class="dialogo-speaker">Atendente do hospital:</span> Toda vez que alguém é picado por escorpião, é muito importante avisar o pessoal da prefeitura que cuida de animais perigosos — a vigilância de zoonoses.</div>
+            <details class="dialogo-full">
+              <summary>Ver diálogo completo da Fase 4</summary>
+              <div style="margin-top:0.75rem;">
+                <div class="dialogo-line"><span class="dialogo-speaker">Agente:</span> É um setor da prefeitura que trabalha para evitar que doenças se espanhem e para prevenir acidentes com animais perigosos, como escorpiões, cobras e aranhas.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Agente:</span> Que alívio! Lembre sempre: não mexa na picada e não coloque nada em cima, nem gelo nem pomada. Se der, lave com água e sabão e corra para o hospital.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Agente:</span> O escorpião só usa o ferrão pra se defender, quando alguém encosta nele — seja de propósito ou sem querer. Ele não sai caçando pessoas.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Agente:</span> Além disso, o escorpião não usa todo o veneno na primeira picada, então cuidado: ele pode picar de novo! E existe algo chamado "picada seca", que é quando ele pica mas não usa o veneno.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Agente:</span> Além do sapo, outros animais como lacraias, corujas, ratinhos e lagartos também comem escorpião. Esses animais gostam de sair à noite, bem na hora que o escorpião anda por aí.</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">André:</span> Uau, que legal! Aprendi muita coisa. Obrigado pelas informações!</div>
+                <div class="dialogo-line"><span class="dialogo-speaker">Agente:</span> De nada! Obrigado por ter vindo nos avisar. Vamos inspecionar o local hoje à noite.</div>
+              </div>
+            </details>
           </div>
         </div>
       </div>
