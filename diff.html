@@ -7,6 +7,159 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .diff-page-hero {
+      background: var(--paper2);
+      border-bottom: 3px solid var(--outline);
+      padding: 7rem 2rem 3rem;
+      text-align: center;
+    }
+    .diff-page-hero h1 {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--text);
+    }
+    .diff-meta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center; margin-top: 1.25rem;
+    }
+    .diff-meta-tag {
+      background: var(--white); border: 2px solid var(--outline);
+      box-shadow: 2px 2px 0 var(--outline);
+      font-size: 0.82rem; font-weight: 700;
+      padding: 0.3rem 0.9rem; border-radius: 8px;
+      color: var(--text);
+    }
+
+    .diff-content { padding: 3rem 2rem 5rem; }
+    .diff-content .container { max-width: 960px; margin: 0 auto; }
+
+    .diff-legend-bar {
+      display: flex; gap: 1.5rem; margin-bottom: 2.5rem;
+      flex-wrap: wrap; align-items: center;
+    }
+    .diff-legend-bar span {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-size: 0.85rem; font-weight: 700; color: var(--text);
+    }
+
+    /* section grouping */
+    .diff-section { margin-bottom: 3rem; }
+    .diff-section-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      color: var(--outline);
+      background: var(--sky);
+      border: 3px solid var(--outline);
+      box-shadow: 4px 4px 0 var(--outline);
+      border-radius: 12px;
+      padding: 0.6rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: inline-block;
+    }
+
+    /* each diff pair */
+    .diff-pair { margin-bottom: 1.25rem; }
+    .diff-pair-cols {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 3px solid var(--outline);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--outline);
+      overflow: hidden;
+      background: var(--white);
+    }
+    .diff-pair-col { padding: 1rem 1.25rem; }
+    .diff-pair-col + .diff-pair-col { border-left: 3px solid var(--outline); }
+    .diff-pair-col-label {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .diff-pair-col-label.orig { color: var(--red-del); }
+    .diff-pair-col-label.prop { color: var(--green-add); }
+    .diff-pair-col-label::before {
+      content: ''; display: inline-block;
+      width: 10px; height: 10px; border-radius: 3px;
+      border: 2px solid var(--outline);
+    }
+    .diff-pair-col-label.orig::before { background: var(--red-del); }
+    .diff-pair-col-label.prop::before { background: var(--green-add); }
+
+    .line-removed {
+      background: rgba(217,69,69,0.08);
+      border-left: 4px solid var(--red-del);
+      padding: 0.4rem 0.7rem; margin: 0.2rem 0;
+      border-radius: 0 6px 6px 0;
+      color: var(--red-del);
+      font-size: 0.9rem; font-weight: 600; line-height: 1.65;
+      text-decoration: line-through; opacity: 0.9;
+    }
+    .line-added {
+      background: rgba(61,171,106,0.08);
+      border-left: 4px solid var(--green-add);
+      padding: 0.4rem 0.7rem; margin: 0.2rem 0;
+      border-radius: 0 6px 6px 0;
+      color: var(--text);
+      font-size: 0.9rem; font-weight: 600; line-height: 1.65;
+    }
+
+    .diff-motivo {
+      margin-top: 0.65rem;
+      background: var(--paper2);
+      border: 2px solid var(--outline);
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--muted);
+      font-style: italic;
+    }
+    .diff-motivo strong { color: var(--text); font-style: normal; }
+
+    /* summary table */
+    .diff-summary { margin-top: 3rem; }
+    .diff-summary h2 {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.4rem; font-weight: 800;
+      color: var(--text); margin-bottom: 1.25rem;
+    }
+    .diff-table {
+      width: 100%; border-collapse: collapse;
+      border: 3px solid var(--outline);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 4px 4px 0 var(--outline);
+    }
+    .diff-table th {
+      background: var(--grass); color: var(--white);
+      font-family: 'Baloo 2', sans-serif; font-weight: 800;
+      font-size: 0.88rem; text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 3px solid var(--outline);
+      text-shadow: 1px 1px 0 var(--outline);
+    }
+    .diff-table td {
+      background: var(--white);
+      font-size: 0.88rem; font-weight: 600;
+      padding: 0.6rem 1rem;
+      border-bottom: 2px solid rgba(42,38,64,0.1);
+      color: var(--text);
+    }
+    .diff-table tr:last-child td { border-bottom: none; }
+    .diff-table tr:last-child td { font-weight: 800; background: var(--paper2); }
+    .diff-table td:last-child { text-align: center; font-weight: 800; color: var(--house-dk); }
+
+    .diff-table2 { margin-top: 1.5rem; }
+    .diff-table2 td:last-child { color: var(--grass-dk); }
+
+    .diff-footnote {
+      margin-top: 0.75rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--muted);
+      font-style: italic;
+    }
+
+    @media (max-width: 640px) {
+      .diff-pair-cols { grid-template-columns: 1fr; }
+      .diff-pair-col + .diff-pair-col { border-left: none; border-top: 3px solid var(--outline); }
+    }
+  </style>
 </head>
 <body>
 
@@ -22,150 +175,755 @@
   </ul>
 </nav>
 
-<!-- ══════════ DIFF ══════════ -->
-<section class="diff-page">
-  <div class="container">
-    <p class="section-label">✏️ Alterações</p>
-    <h2 class="section-title">Diff: Versão 1 → Versão 2</h2>
-    <p class="section-desc">
-      Comparativo entre a Versão 1 (até 10/04/2025) e a Versão 2 (a partir de 11/04/2025).
-    </p>
-
-    <div class="diff-intro">
-      <strong>Contexto:</strong> A segunda versão incorpora feedbacks de avaliação especializada,
-      tornando os diálogos mais precisos e adicionando elementos de quiz para reforço do aprendizado ativo.
-    </div>
-
-    <div class="diff-legend">
-      <span><span class="leg-dot" style="background:var(--red-del)"></span> Removido (V1)</span>
-      <span><span class="leg-dot" style="background:var(--green-add)"></span> Adicionado (V2)</span>
-    </div>
-
-    <div class="diff-grid">
-
-      <div class="diff-block">
-        <div class="diff-block-header">Fala [8] — Pai captura o escorpião</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text"><div class="diff-removed">"Pronto. Ainda bem que consegui capturar ele, senão teríamos temos que notificar a unidade de saúde ou a Unidade de Vigilância... Mas como já capturei posso levar até uma unidade notificante..."</div></div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">"Acabei de capturar um escorpião do seu quarto. Temos que notificar a Unidade de Vigilância de Zoonoses do município."</div>
-              <p class="diff-note">Mensagem simplificada e direta. Elimina redundância e hesitação.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="diff-block">
-        <div class="diff-block-header">Fala [12] — Vocabulário para crianças</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text"><div class="diff-removed">"...ele <strong>se camufla</strong> bem..."</div></div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">"...ele <strong>se esconde</strong> bem..."</div>
-              <p class="diff-note">Vocabulário simplificado para o público-alvo de 5–10 anos.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="diff-block">
-        <div class="diff-block-header">Falas [16–16.7] — Quiz adicionado ao final da Fase 1</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text"><div class="diff-removed">Ausente. O pai simplesmente libera André para sair após a conversa.</div></div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">Quiz inserido: 3 opções de resposta sobre o que fazer em caso de picada. Respostas erradas corrigidas com orientação.</div>
-              <p class="diff-note">Reforça aprendizado ativo logo ao fim da Fase 1.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="diff-block">
-        <div class="diff-block-header">Fase 2 — Missão de limpeza do quintal</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text"><div class="diff-removed">Inclui mecânica de busca de equipamentos (luvas e botas na mochila). André precisa encontrar os itens antes do pai iniciar a limpeza.</div></div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">Mecânica de busca removida. O pai já está no quintal e inicia diretamente. Novo diálogo de conclusão [33.1–33.3] mais fluido.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="diff-block">
-        <div class="diff-block-header">Fase 3 — Quem foi picado e primeiro socorro</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text">
-              <div class="diff-removed">"O escorpião picou <strong>o bebê</strong>!"</div>
-              <div class="diff-removed">Adulto diz: "Vou passar uma pomada para diminuir a dor."</div>
-            </div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">"O escorpião picou <strong>o Charlinho</strong>!" — personagem já apresentado, gerando continuidade narrativa.</div>
-              <div class="diff-added">Fala da pomada removida — reforça a orientação correta de não aplicar nada na picada.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="diff-block">
-        <div class="diff-block-header">Fase 4 — Renomeação e novo foco</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text"><div class="diff-removed">Chamada "Evitando acidentes" / "Controle de zoonoses". Focada em limpeza de ambiente pelo agente (aspirador, pinça, lanterna de luz negra).</div></div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">Renomeada para <strong>"Avisar sobre a ocorrência da picada"</strong>. Foco em notificação e quiz sobre comportamento do escorpião (ataque, picada seca, predadores naturais).</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="diff-block">
-        <div class="diff-block-header">Fala [29] Paulo — Veneno e queimada</div>
-        <div class="diff-cols">
-          <div class="diff-col">
-            <div class="diff-col-label v1">Versão 1</div>
-            <div class="diff-text"><div class="diff-removed">"...esses bichos são resistentes <strong>a queimadas e</strong> a veneno! Fazer isso não vai matar os escorpiões..."</div></div>
-          </div>
-          <div class="diff-col">
-            <div class="diff-col-label v2">Versão 2</div>
-            <div class="diff-text">
-              <div class="diff-added">"...esses bichos são resistentes a veneno! Jogar venenos não vai matar os escorpiões..."</div>
-              <p class="diff-note">Referência a queimadas removida — simplificação para o contexto urbano.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+<!-- ══════════ HERO ══════════ -->
+<div class="diff-page-hero">
+  <p class="section-label" style="background:var(--house);color:var(--outline);">✏️ Proposta de Adaptação</p>
+  <h1>Proposta de Adaptação de Linguagem — Roteiro do Jogo</h1>
+  <div class="diff-meta">
+    <span class="diff-meta-tag">🎮 Jogo: Escorpião: Como Evitar Acidentes</span>
+    <span class="diff-meta-tag">👦 Público-alvo: 9 a 14 anos (Ensino Fundamental)</span>
+    <span class="diff-meta-tag">📝 Escopo: Alterações de linguagem — sem mudanças estruturais</span>
   </div>
-</section>
+  <div class="diff-legend-bar" style="justify-content:center;margin-top:1.5rem;">
+    <span><span class="leg-dot" style="background:var(--red-del)"></span> Fala original (−)</span>
+    <span><span class="leg-dot" style="background:var(--green-add)"></span> Fala proposta (+)</span>
+  </div>
+</div>
+
+<!-- ══════════ CONTEÚDO ══════════ -->
+<div class="diff-content">
+  <div class="container">
+
+    <!-- ── Quest 1 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Quest 1 — Guardar os Brinquedos</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Você pode ir depois que organizar seus brinquedos. Vá até seu quarto e guarde os brinquedos na prateleira."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Pode ir depois de organizar seus brinquedos. Sobe até seu quarto e guarda tudo na prateleira, combinado?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Linguagem mais próxima da fala cotidiana do público infantil. Tom mais acolhedor.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Termine de guardar seus brinquedos antes de sair para brincar."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Ei! Termina de guardar os brinquedos primeiro, antes de sair para brincar."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Tom mais natural e direto para crianças.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Sim, pode ir brincar lá fora."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Ótimo! Agora pode ir brincar lá fora."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Resposta muito curta e fria no original. "Ótimo!" reforça positivamente a ação da criança.</div>
+      </div>
+    </div>
+
+    <!-- ── Cena 1 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Cena 1 — Encontro com o Escorpião</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Não! Com escorpião não se brinca! E até para capturar é importante usar uma pinça longa ou prender o escorpião com um pote para ele não chegar perto da mão."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Não! Com escorpião não se brinca! E só adultos podem tentar capturá-lo, usando uma pinça comprida ou um pote com tampa, para não precisar tocar no bicho com a mão."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Original omite que apenas adultos devem capturar o escorpião — informação de segurança importante para o público infantil.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Esse bichinho pode até ser pequeno do tamanho de uma tampinha de garrafa, mas com essas cores amarelo e marrom ele se esconde bem, além de se movimentar de noite, o que dificulta ainda mais de ver. A picada desse bicho é venenosa e pode até matar, principalmente crianças que resolvem mexer com escorpiões."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Esse bichinho é pequeno, mais ou menos do tamanho de uma tampinha de garrafa. Com as cores amarelo e marrom, ele se esconde muito bem. E ele sai à noite, o que torna ainda mais difícil de ver. A picada dele é venenosa e pode ser muito perigosa, especialmente para crianças."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Frase original muito longa com três orações encadeadas — difícil de acompanhar para essa faixa etária. Quebrada em frases menores. Tom assustador ("pode matar") substituído por tom preventivo.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Isso é muito sério! Escorpião mata! Então não brinque com escorpiões. Sempre que avistar um, ou se for picado por um, chame um adulto na hora. Entendido?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Isso é muito sério! Então nunca brinque com escorpião. Sempre que ver um, ou se alguém for picado, chame um adulto na hora. Entendido?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Escorpião mata!" como frase isolada é impactante demais sem contexto de prevenção. Substituído por orientação direta.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Ótimo! Agora quero saber o seguinte. Caso você ou qualquer criança de até 10 anos seja picada por um escorpião, qual a primeira coisa que deve ser feita?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Ótimo! Agora me diz: se você ou alguma criança for picada por um escorpião, qual é a primeira coisa que deve ser feita?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Caso... seja" é conjunção subjuntiva de uso formal. A restrição "de até 10 anos" pode fazer crianças de 11–14 anos acharem que a regra não se aplica a elas.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"O ideal é não passar nada na picada. O importante é procurar atendimento em uma unidade de saúde especializado em acidentes com escorpião."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Não coloque nada na picada! O mais importante é procurar atendimento num hospital ou Pronto Socorro especializado em acidentes com escorpião."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Unidade de saúde" é vago e pode ser confundido com Posto de Saúde, que não realiza esse atendimento.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Exatamente. temos que procurar imediatamente socorro médico especializado em acidentes com escorpião. Precisa ir num Pronto Socorro ou Hospital e não num Posto de Saúde."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Isso mesmo! Temos que correr para um Pronto Socorro ou Hospital. Esses lugares têm o tratamento certo para picada de escorpião. Posto de Saúde não tem esse atendimento, então é importante ir ao lugar certo."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Socorro médico especializado" é jargão formal. A distinção Pronto Socorro vs. Posto de Saúde foi mantida, mas com explicação do motivo — mais eficaz pedagogicamente.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Acabei de capturar um escorpião que estava aqui no seu quarto. Temos que notificar a unidade de zoonoses do município."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Acabei de pegar um escorpião que estava aqui no seu quarto. Precisamos avisar o pessoal da prefeitura que cuida dos animais perigosos — a vigilância de zoonoses."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Notificar a unidade de zoonoses do município" é jargão burocrático. Substituído por linguagem acessível com explicação inline do que é zoonoses.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Temos que procurar ajuda o quanto antes em um Pronto Socorro ou Hospital. Eles vão encaminhar para o atendimento correto."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"A gente vai correndo para o Pronto Socorro ou Hospital mais perto! Eles sabem o que fazer e encaminham para o lugar certo."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Linguagem mais próxima da criança. "Encaminhar para o atendimento correto" levemente burocratizado.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Mais importante do que procurar um lugar especializado em acidente com escorpião é ter o atendimento o mais rápido possível, no máximo 1h30, principalmente se for criança, porque a picada pode matar. Na unidade vão fazer o atendimento correto e encaminhamento para o centro especializado."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"O mais importante é chegar rápido ao hospital! Não pode demorar mais de uma hora e meia depois da picada, principalmente se for criança, porque quanto mais tempo passa, mais perigoso fica. Qualquer Pronto Socorro vai saber o que fazer e vai encaminhar para o tratamento certo."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Frase muito longa. "Encaminhamento para o centro especializado" é jargão burocrático. O prazo "1h30" sem referência temporal foi reformulado para "não pode demorar mais de uma hora e meia depois da picada".</div>
+      </div>
+    </div>
+
+    <!-- ── Cena 2 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Cena 2 — Vizinho Paulo Alerta Sobre Escorpiões</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Ah, sim. infelizmente esses bichos tem sido um dos maiores problemas de saúde pública atualmente. Vários acidentes e alguns que até chegam a matar."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Ah, sim. Infelizmente esses bichos têm causado muitos acidentes por aqui. Algumas picadas são muito perigosas e podem ser até mortais se a pessoa não for atendida a tempo."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Saúde pública" é jargão técnico da área da saúde. "Vários acidentes e alguns que até chegam a matar" é frase incompleta, sem verbo principal. Tom reequilibrado: mantém a seriedade mas inclui o contexto de solução ("se não for atendida a tempo").</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Esses bichinhos existem em todo país, mas têm se adaptado bem para viver nas cidades, em meio aos seres humanos. E principalmente porque adoram comer baratas, e como na cidade tem barata pra todo lado, não é surpresa encontrar esses escorpiões no meio de pedras, entulho ou até mesmo saindo dos ralos de dentro de casa. Hum. Você disse que encontrou um escorpião. Onde foi isso?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Esses bichinhos existem em todo o país, mas aprenderam a viver nas cidades, perto das pessoas. O motivo é simples: eles adoram comer baratas! E nas cidades tem barata pra todo lado. Por isso não é difícil encontrar escorpião escondido entre pedras, entulho — que são restos de obra — ou até saindo dos ralos dentro de casa. Aliás, onde você encontrou o escorpião?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Frase muito longa com múltiplas informações encadeadas. "Entulho" explicado inline ("restos de obra"). "Em meio aos seres humanos" é formal. Quebrada em partes menores para facilitar a leitura.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Além de limpar o quintal, retirando toda sujeira e entulho acumulado, também temos que manter os inimigos naturais dos escorpiões. Mas lembre, esses bicho são resistentes a veneno! Jogar venenos não vai matar os escorpiões, só vai tira eles do lugar e pode causar mais acidentes."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Para acabar com os escorpiões, é preciso limpar o quintal, tirar toda a sujeira e o entulho acumulado. E também ajuda ter por perto os inimigos naturais dos escorpiões. Mas lembre: esses bichos são resistentes a veneno! Jogar veneno não vai matá-los, vai apenas tirar eles do esconderijo e pode causar mais acidentes."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Fala com dois erros gramaticais que seriam reproduzidos para as crianças ("esses bicho", "vai tira eles") além de estrutura de frase confusa.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Não jogue veneno nos escorpiões, isso não funciona. Só tira eles de baixo dos entulhos ou de onde estiverem escondidos e fica mais perigoso ainda ter acidente com esses bichos."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Não jogue veneno nos escorpiões, porque isso não funciona! O veneno só tira eles do esconderijo e aí fica ainda mais perigoso, porque eles ficam soltos por aí."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Fica mais perigoso ainda ter acidente com esses bichos" é construção rebuscada. Reformulado de forma mais direta e clara.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Legal, vou falar com meu pai pra gente acabar com os escorpiões no quintal."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Legal! Vou falar com meu pai pra gente limpar o quintal."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Acabar com os escorpiões" contradiz o que foi ensinado (não é possível eliminar completamente). "Limpar o quintal" reflete a ação correta ensinada no jogo.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Já falou com seu pai? Para limpar o quintal?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Já falou com seu pai sobre limpar o quintal?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Para limpar o quintal?" é frase fragmentada — inadequada como modelo de linguagem para crianças.</div>
+      </div>
+    </div>
+
+    <!-- ── Quest 2 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Quest 2 — Limpar o Lixo do Quintal</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Pai, temos que limpar o quintal pra evitar escorpiões."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Pai, a gente precisa limpar o quintal pra evitar escorpiões!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "A gente precisa" é mais natural na fala de uma criança do que "temos que".</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Sim, você tem razão. Agora fique de olho, mas fique longe para evitar que algum escorpião possa chegar perto de você e te pique."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Você tem razão, filho. Agora fique de olho, mas fica longe para nenhum escorpião chegar perto de você e te picar."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Reformulado para fala mais natural de um pai. Frase mais direta.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Sim filho, acabei de limpar o quintal!"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Boa notícia, filho! Acabei de limpar o quintal!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Sim filho" como abertura é pouco natural. "Boa notícia!" reforça positivamente o evento e mantém o engajamento da criança.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Que bom, pai! Assim prevenimos o aparecimento de criadouro de escorpiões!"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Que bom, pai! Assim a gente evita que os escorpiões se escondam aqui perto!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Prevenimos o aparecimento de criadouro" é formal e rebuscado para uma criança falar.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Ainda não terminei, vou limpar e já volto!"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Ainda não terminei, mas já já volto!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Já já" é expressão coloquial natural para o contexto e para a faixa etária.</div>
+      </div>
+    </div>
+
+    <!-- ── Quest 3 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Quest 3 — Acontece a Picada</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Temos que matar o escorpião? Mas como?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"A gente precisa matar o escorpião? Mas como?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Linguagem mais natural para criança.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Se der, vamos capturar ele e levá-lo junto o mais rápido possível para uma unidade de saúde mais especializada."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Se der, vamos capturar ele com um pote e levar junto para o hospital o mais rápido possível!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Unidade de saúde especializada" é vago e formal. Especificado como "hospital". Instrução de usar pote adicionada, reforçando o que foi ensinado anteriormente.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Temos que levar para uma unidade especializada, mesmo que longe."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Temos que levar para um hospital ou Pronto Socorro especializado, mesmo que seja longe."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Unidade especializada" é jargão. Especificado como "hospital ou Pronto Socorro".</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Se for muito longe temos que ir pra um pronto socorro ou hospital mais perto."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Se o hospital especializado for muito longe, temos que ir para o Pronto Socorro mais perto."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Frase original ambígua. Deixa claro que o Pronto Socorro é a alternativa quando o especializado está longe — distinção importante para a mensagem educativa.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Eu não sei."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Eu não sei o que fazer..."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Eu não sei" isolado é abrupto demais. Complemento torna a reação mais natural e humana.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Se for muito longe temos que ir pra um pronto socorro ou hospital mais perto."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Se o hospital especializado for muito longe, a gente vai para o Pronto Socorro ou Hospital mais perto!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Mesma correção de clareza e consistência com as demais falas da cena.</div>
+      </div>
+    </div>
+
+    <!-- ── Cena 3 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Cena 3 — Atendente do Hospital</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Parabéns! Você agiu rápido. Se não fosse por você o quadro poderia ser bem mais grave."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Parabéns! Você agiu muito rápido. Se não fosse por você, a situação poderia ser muito mais grave."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "O quadro" é jargão médico. Substituído por "a situação".</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Toda vez que acontece a picada é importante avisar o setor de controle de vetores. No momento do atendimento o pai ou responsável deve sempre lembrar de avisar que aconteceu a picada."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Toda vez que alguém é picado por escorpião, é muito importante avisar o pessoal da prefeitura que cuida de animais perigosos — a vigilância de zoonoses. O adulto que estiver acompanhando deve lembrar de avisar sobre a picada durante o atendimento."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Setor de controle de vetores" é jargão da saúde pública desconhecido para crianças. "Pai ou responsável" é linguagem jurídica/burocrática. Explicação inline de "zoonoses" adicionada para consistência com o restante do jogo.</div>
+      </div>
+    </div>
+
+    <!-- ── Cena 4 ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Cena 4 — Agente de Zoonoses</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"É um departamento que tem como papel fundamental impedir a propagação de doenças e de evitar acidentes causados por animais peçonhentos e venenosos."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"É um setor da prefeitura que trabalha para evitar que doenças se espanhem e para prevenir acidentes com animais perigosos, como escorpiões, cobras e aranhas."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Peçonhentos" é termo técnico desconhecido para crianças de 9–10 anos. "Propagação de doenças" é jargão epidemiológico. Exemplos concretos (escorpiões, cobras, aranhas) facilitam a compreensão.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Ótimo! É muito importante lembrar que não se deve mexer na picada ou aplicar qualquer coisa no local. No máximo limpar a picada com água e sabão e correr para o hospital. Se der tempo, capture o escorpião e leve junto no atendimento. Caso contrário, corra direto para o atendimento mais próximo."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Que alívio! Lembre sempre: não mexa na picada e não coloque nada em cima, nem gelo nem pomada. Se der, lave com água e sabão e corra para o hospital. Se tiver tempo, tente capturar o escorpião com um pote e leve junto. Mas se não der tempo, vai direto para o atendimento sem perder tempo!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Aplicar qualquer coisa no local" é linguagem médica formal. "Caso contrário" é conjunção mais formal. Exemplos concretos (gelo, pomada) tornam a instrução mais clara para crianças.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Só vai ferroar pra se defender se alguém encostar nele, seja intencionalmente ou sem querer."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"O escorpião só usa o ferrão pra se defender, quando alguém encosta nele — seja de propósito ou sem querer. Ele não sai caçando pessoas."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Intencionalmente" é palavra longa e formal. "De propósito" é mais acessível. Frase extra ("Ele não sai caçando pessoas") reforça a mensagem de forma clara e direta.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Além dele não usar todo veneno na primeira picada, podendo causar um segundo acidente, o escorpião também pode dar uma picada chamada de 'picada seca', ou seja, picar e não usar veneno."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Além disso, o escorpião não usa todo o veneno na primeira picada, então cuidado: ele pode picar de novo! E existe algo chamado 'picada seca', que é quando ele pica mas não usa o veneno. Mas nunca dá pra saber qual será, então sempre corra para o hospital!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Estrutura com gerúndio aninhado ("podendo causar...") é complexa para a faixa etária. Quebrado em frases menores. Alerta de segunda picada reforçado de forma direta.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"E mais uma pra ver se você está esperto. Sabe me dizer um predador natural dos escorpiões?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"E mais uma para ver se você está esperto. Você sabe qual é um inimigo natural do escorpião?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Predador natural" é jargão científico. Substituído por "inimigo natural" — mais acessível e já utilizado anteriormente no jogo (consistência).</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Muita gente tem galinha no quintal achando que vai pegar os escorpiões. Pode até pegar um ou outro, mas é difícil porque a galinha tem hábitos diurnos enquanto que o escorpião tem hábitos noturnos."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Muita gente coloca galinha no quintal achando que vai resolver o problema. Pode até pegar um ou outro, mas é difícil — porque a galinha sai de dia, e o escorpião sai à noite. Como eles têm horários diferentes, quase nunca se encontram!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Hábitos diurnos/noturnos" são termos técnicos. Substituídos por "sai de dia" / "sai à noite" — mesma informação, linguagem acessível.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Além do sapo, lacraias, corujas, camundongos, lagartos, entre outros animais que tenham um hábito mais noturno são ótimos predadores para os escorpiões."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Além do sapo, outros animais como lacraias, corujas, ratinhos e lagartos também comem escorpião. Esses animais gostam de sair à noite, bem na hora que o escorpião anda por aí, então são ótimos para controlar a quantidade desses bichos."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Camundongos" → "ratinhos" (mais familiar para crianças). "Hábito mais noturno" → "gostam de sair à noite". "Predadores" → "comem escorpião".</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Legal. Quanta coisa. Obrigado pelas informações."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Uau, que legal! Aprendi muita coisa. Obrigado pelas informações!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Tom mais animado e entusiasmado, compatível com a faixa etária e com o momento de encerramento da cena.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"De nada. Obrigado novamente por ter vindo até aqui notificar. Vamos inspecionar o local de noite."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"De nada! Obrigado por ter vindo nos avisar. Vamos inspecionar o local hoje à noite."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Notificar" é jargão burocrático. "De noite" é ambíguo — "hoje à noite" é mais específico e natural na fala.</div>
+      </div>
+    </div>
+
+    <!-- ── Quiz na Ambulância ── -->
+    <div class="diff-section">
+      <div class="diff-section-title">Quiz na Ambulância</div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Escorpiões gostam de lugares escuros e podem se esconder dentro de sapatos, roupas e toalhas."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Os escorpiões adoram lugares escuros e podem se esconder dentro de sapatos, roupas e toalhas. Por isso, sempre sacuda antes de usar!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Orientação prática ("sempre sacuda antes de usar") adicionada para fechar o aprendizado do quiz com uma ação concreta.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Na verdade não..."<br>"Eles procuram abrigo nesses locais, por isso não devemos mexer em lixo ou madeiras acumuladas."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Na verdade sim!"<br>"Eles procuram abrigo nesses lugares escuros e com bastante material empilhado. Por isso, não mexa em lixo ou madeiras acumuladas sem luvas e sapato fechado!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> A pergunta afirma algo verdadeiro ("escorpiões gostam de entulho?"). Responder com "Na verdade não..." é uma contradição lógica que confunde o jogador. Corrigido para "Na verdade sim!". Orientação de proteção (luvas, sapato fechado) adicionada.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Não é bem assim..."<br>"as baratas e grilos são os alimentos favoritos dos escorpiões. Se a casa não tiver baratas, o escorpião não vai querer ficar lá."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Na verdade sim!"<br>"As baratas e os grilos são os alimentos favoritos dos escorpiões. Por isso, casas sem baratas têm menos chance de ter escorpião por perto. Mas atenção: manter o quintal limpo e sem entulho também é muito importante!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Mesma correção lógica: afirmação verdadeira com resposta errada "Não é bem assim". Informação complementar sobre quintal evita a simplificação excessiva de "só eliminar baratas resolve".</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"O escorpião é um animal de hábitos diurnos (gosta do dia)?"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"O escorpião é um animal de hábitos diurnos — ou seja, gosta de sair durante o dia?"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> Parênteses no meio de uma pergunta de quiz ficam visualmente estranhos. Substituído por travessão com explicação integrada.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"Os escorpiões são noturnos! Muita gente coloca galinhas no quintal achando que elas vão acabar com eles. Mas tem um problema: a galinha dorme à noite! Bem na hora que o escorpião acorda. Como eles têm horários diferentes, quase nunca se encontram!"</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Os escorpiões são noturnos — eles só saem à noite! Muita gente coloca galinhas no quintal achando que elas vão pegar os escorpiões. Mas tem um problema: a galinha dorme à noite, exatamente quando o escorpião acorda! Como eles têm horários diferentes, quase nunca se encontram."</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Bem na hora que o escorpião acorda." era frase incompleta, solta. Integrada à frase anterior para dar coesão ao texto.</div>
+      </div>
+
+      <div class="diff-pair">
+        <div class="diff-pair-cols">
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label orig">Original</div>
+            <div class="line-removed">"O veneno de algumas espécies é muito forte e pode sim levar à morte se a pessoa não for atendida rápido. Em caso de picada, a nossa ambulância tem que voar para o hospital, pois cada minuto conta para salvar uma vida! Principalmente em crianças."</div>
+          </div>
+          <div class="diff-pair-col">
+            <div class="diff-pair-col-label prop">Proposta</div>
+            <div class="line-added">"Verdade! O veneno de alguns tipos de escorpião é muito forte e pode sim ser fatal se a pessoa não for atendida rápido. Por isso, em caso de picada, temos que voar para o hospital — cada minuto conta para salvar uma vida, especialmente a de uma criança!"</div>
+          </div>
+        </div>
+        <div class="diff-motivo"><strong>[motivo]</strong> "Algumas espécies" é jargão zoológico → "alguns tipos". "Principalmente em crianças." era frase solta e incompleta — integrada ao período anterior.</div>
+      </div>
+    </div>
+
+    <!-- ── Resumo ── -->
+    <div class="diff-summary">
+      <h2>📊 Resumo das Alterações</h2>
+
+      <table class="diff-table">
+        <thead>
+          <tr>
+            <th>Cena</th>
+            <th>Falas alteradas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Quest 1 — Guardar Brinquedos</td><td>3</td></tr>
+          <tr><td>Cena 1 — Encontro com o Escorpião</td><td>8</td></tr>
+          <tr><td>Cena 2 — Vizinho Paulo</td><td>6</td></tr>
+          <tr><td>Quest 2 — Limpar o Quintal</td><td>5</td></tr>
+          <tr><td>Quest 3 — A Picada</td><td>6</td></tr>
+          <tr><td>Cena 3 — Atendente do Hospital</td><td>2</td></tr>
+          <tr><td>Cena 4 — Agente de Zoonoses</td><td>9</td></tr>
+          <tr><td>Quiz na Ambulância</td><td>6</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>45</strong></td></tr>
+        </tbody>
+      </table>
+
+      <table class="diff-table diff-table2">
+        <thead>
+          <tr>
+            <th>Tipo de alteração</th>
+            <th>Ocorrências</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Simplificação de jargão técnico/médico/burocrático</td><td>14</td></tr>
+          <tr><td>Adequação do tom para público infantil</td><td>7</td></tr>
+          <tr><td>Quebra de frases longas e complexas</td><td>8</td></tr>
+          <tr><td>Correção de contradição lógica no texto</td><td>3</td></tr>
+          <tr><td>Adição de orientação prática ausente</td><td>4</td></tr>
+          <tr><td>Correção de erro gramatical com impacto pedagógico*</td><td>3</td></tr>
+        </tbody>
+      </table>
+
+      <p class="diff-footnote">*Incluídas apenas as correções onde o erro gramatical seria reproduzido diretamente para as crianças (ex.: "esses bicho", "vai tira eles").</p>
+    </div>
+
+  </div>
+</div>
 
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
