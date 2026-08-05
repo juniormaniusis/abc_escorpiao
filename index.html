@@ -4,371 +4,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ABC do Escorpião — Jogo Educativo 3D & Pesquisa Científica</title>
-  
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Jogo sério educativo 3D em Unity Engine focado na prevenção de acidentes com escorpiões, manejo ambiental e conscientização em saúde pública." />
-  <meta name="keywords" content="Jogo Educativo, Unity 3D, Escorpião, Prevenção, Zoonoses, Saúde Pública, C#, PGC, Mestrado" />
-  
-  <!-- Google Fonts -->
+  <title>ABC do Escorpião — Jogo Educativo Divertido em 3D</title>
+
+  <!-- Google Fonts: Baloo 2 & Nunito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
   <!-- ══════════ NAVBAR ══════════ -->
-  <header class="navbar">
+  <nav class="nav">
     <div class="container">
       <a href="index.html" class="nav-brand">
-        <div class="nav-brand-icon">🦂</div>
-        <div>ABC do <span>Escorpião</span></div>
+        <span class="nav-brand-icon">🦂</span>
+        <span>ABC do Escorpião</span>
       </a>
-      
+
       <ul class="nav-links">
-        <li><a href="#visao-geral">Visão Geral</a></li>
-        <li><a href="#galeria">Galeria 3D</a></li>
-        <li><a href="#missoes">Missões</a></li>
-        <li><a href="#personagens">Personagens</a></li>
-        <li><a href="#download">Download</a></li>
+        <li><a href="#sobre">Por que Jogar?</a></li>
+        <li><a href="#telas">Telas do Jogo</a></li>
+        <li><a href="#turma">Conheça a Turma</a></li>
+        <li><a href="#download">Baixar Grátis</a></li>
       </ul>
-      
-      <div class="nav-actions">
-        <a href="https://github.com/juniormaniusis/abc_escorpiao" target="_blank" class="btn btn-secondary">
-          <span>💻 GitHub</span>
-        </a>
-      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- ══════════ HERO SECTION ══════════ -->
-  <section class="hero" id="visao-geral">
+  <section class="hero">
     <div class="container">
       <div class="hero-grid">
-        
-        <!-- Coluna Esquerda: Texto & Ações -->
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="hero-badge-pulse"></span>
-            <span>Jogo Sério Educativo em 3D • Unity Engine</span>
-          </div>
+
+        <!-- Lado Esquerdo: Chamada Divertida -->
+        <div>
+          <span class="badge-tag">🎮 Jogo Educativo em 3D</span>
           
           <h1 class="hero-title">
-            Prevenção e <br/>
-            <span class="gradient-text">Aprendizagem 3D</span> <br/>
-            para Crianças.
+            Aprenda brincando a se proteger dos escorpiões! 🦂
           </h1>
-          
-          <p class="hero-subtitle">
-            Uma aventura pedagógica imersiva para ensinar crianças de 6 a 10 anos a reconhecer riscos, agir corretamente em caso de picada e promover o manejo ambiental comunitário contra o escorpionismo.
+
+          <p class="hero-sub">
+            Embarque numa aventura super divertida com o André e seus amigos! Explore o bairro em 3D, descubra como deixar sua casa segura e aprenda o que fazer se alguém for picado.
           </p>
-          
+
           <div class="hero-actions">
-            <a href="#download" class="btn btn-primary">
-              <span>⬇ Download Grátis (Windows)</span>
+            <a href="#download" class="btn btn-green">
+              <span>⬇ Baixar o Jogo Grátis</span>
             </a>
-            <a href="https://github.com/juniormaniusis/abc_escorpiao" target="_blank" class="btn btn-secondary">
-              <span>📜 Explorar Código C#</span>
+            <a href="#telas" class="btn btn-yellow">
+              <span>🖼️ Ver Fotos do Jogo</span>
             </a>
-          </div>
-          
-          <div class="hero-stats">
-            <div class="stat-item">
-              <h4 class="gradient-text">4</h4>
-              <p>Missões Educativas</p>
-            </div>
-            <div class="stat-item">
-              <h4 class="gradient-text">100%</h4>
-              <p>Código-Fonte Aberto</p>
-            </div>
-            <div class="stat-item">
-              <h4 class="gradient-text">A*</h4>
-              <p>Procedural NavMesh</p>
-            </div>
           </div>
         </div>
-        
-        <!-- Coluna Direita: Moldura 3D Showcase -->
-        <div class="hero-visual">
-          <div class="showcase-frame">
-            <img src="img/menu_inicial.png" alt="Menu Inicial do Jogo ABC do Escorpião" class="showcase-img" />
-            <div class="showcase-floating-badge">
-              <div class="badge-icon">🎮</div>
-              <div class="badge-text">
-                <strong>Versão 1.0 Compilada</strong>
-                <span>Executável Windows x86_64</span>
-              </div>
-            </div>
+
+        <!-- Lado Direito: Imagem Principal do Jogo -->
+        <div class="hero-visual-frame">
+          <div class="ink ink-lg">
+            <img src="img/menu_inicial.png" alt="Tela inicial do jogo ABC do Escorpião" style="width: 100%; height: auto; border-radius: 22px; display: block;" />
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════ PILARES / DESTAQUES ══════════ -->
-  <section class="section-padding">
+  <!-- ══════════ POR QUE JOGAR? (CARDS DIVERTIDOS) ══════════ -->
+  <section class="features-section" id="sobre">
     <div class="container">
-      <div style="text-align: center; margin-bottom: 48px;">
-        <span class="section-tag">Engenharia & Pedagogia</span>
-        <h2 class="section-title">Pilares do Projeto</h2>
-        <p class="section-desc" style="margin-left: auto; margin-right: auto;">
-          Desenvolvido com fundamentação em saúde pública, princípios modernos de engenharia de software e acessibilidade infantil.
-        </p>
-      </div>
-      
-      <div class="pillars-grid">
-        <div class="pillar-card glass-card">
-          <div class="pillar-icon">🏥</div>
-          <h3>Conscientização em Saúde</h3>
-          <p>Instrui sobre condutas imediatas de socorro, desmistifica venenos ineficazes e ensina o descarte seguro de entulhos e criadouros de baratas.</p>
-        </div>
-        
-        <div class="pillar-card glass-card">
-          <div class="pillar-icon">⚡</div>
-          <h3>Arquitetura Robusta C#</h3>
-          <p>Construído com padrões de projeto consagrados na Unity Engine: <em>Factory Method</em> para spawning, <em>Memento</em> para Save System e algoritmo $A^*$ para trilhas procedurais.</p>
-        </div>
-        
-        <div class="pillar-card glass-card">
-          <div class="pillar-icon">🔊</div>
-          <h3>Acessibilidade Infantil</h3>
-          <p>Áudios completamente narrados acompanham todas as legendas do jogo, permitindo a operabilidade por crianças alfabetizadas ou em fase de alfabetização.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════ GALERIA 3D SHOWCASE ══════════ -->
-  <section class="section-padding" id="galeria">
-    <div class="container">
-      <span class="section-tag">Ambientes e Interfaces</span>
-      <h2 class="section-title">Galeria de Telas do Jogo 3D</h2>
+      <span class="badge-tag" style="display: table; margin: 0 auto 12px;">🌟 Diversão & Aprendizado</span>
+      <h2 class="section-title">Por que você vai amar esse jogo?</h2>
       <p class="section-desc">
-        Explore a estética <em>cartoon low poly</em>, a interface intuitiva (HUD) e os cenários desenvolvidos na Unity.
+        Desenvolvido para crianças de todas as idades aprenderem a cuidar do próprio bairro de forma leve e interativa!
       </p>
-      
+
+      <div class="features-grid">
+
+        <div class="feature-card ink">
+          <div class="feature-icon">🏡</div>
+          <h3>Explore em 3D</h3>
+          <p>Caminhe pelo quarto do André, pelo quintal e pelas ruas da vizinhança descobrindo segredos e cumprindo missões!</p>
+        </div>
+
+        <div class="feature-card ink">
+          <div class="feature-icon">🗣️</div>
+          <h3>Totalmente Narrado</h3>
+          <p>Todas as falas dos personagens são narradas com voz para você escutar enquanto lê no jogo!</p>
+        </div>
+
+        <div class="feature-card ink">
+          <div class="feature-icon">🚑</div>
+          <h3>Minigame da Ambulância</h3>
+          <p>Responda às perguntas rápidas no caminho do hospital para ajudar o socorro a chegar rapidinho!</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ GALERIA DE TELAS DO JOGO ══════════ -->
+  <section class="gallery-section" id="telas">
+    <div class="container">
+      <span class="badge-tag" style="display: table; margin: 0 auto 12px;">📸 Galeria de Fotos</span>
+      <h2 class="section-title">Veja o Jogo em Ação!</h2>
+      <p class="section-desc">
+        Confira como são os cenários coloridos e os desafios que esperam por você.
+      </p>
+
       <div class="gallery-grid">
-        
-        <div class="gallery-card glass-card">
-          <div class="gallery-thumb">
-            <img src="img/quarto_andre.png" alt="Quarto do André" />
-          </div>
-          <div class="gallery-info">
-            <h4>Quarto do André (Fase 1)</h4>
-            <p>Primeira missão: guardar brinquedos para eliminar possíveis esconderijos do escorpião.</p>
+
+        <div class="gallery-card ink">
+          <img src="img/quarto_andre.png" alt="Quarto do André" />
+          <div class="gallery-card-body">
+            <h4>Quarto do André</h4>
+            <p>Guarde os brinquedos para deixar o quarto bem organizado!</p>
           </div>
         </div>
-        
-        <div class="gallery-card glass-card">
-          <div class="gallery-thumb">
-            <img src="img/quintal_entulho.png" alt="Quintal com Entulho" />
-          </div>
-          <div class="gallery-info">
-            <h4>Limpeza do Quintal (Fase 2)</h4>
-            <p>Troca de controle para o Pai para a realização da limpeza segura dos entulhos no quintal.</p>
+
+        <div class="gallery-card ink">
+          <img src="img/quintal_entulho.png" alt="Quintal e Limpeza" />
+          <div class="gallery-card-body">
+            <h4>Limpeza do Quintal</h4>
+            <p>Ajude a tirar o entulho para evitar que escorpiões se escondam!</p>
           </div>
         </div>
-        
-        <div class="gallery-card glass-card">
-          <div class="gallery-thumb">
-            <img src="img/rua_vizinhanca.png" alt="Rua da Vizinhança" />
-          </div>
-          <div class="gallery-info">
-            <h4>Rua da Vizinhança (Fase 2/3)</h4>
-            <p>Navegação guiada por trilhas procedurais em tempo de execução sem minimapa polutuoso.</p>
+
+        <div class="gallery-card ink">
+          <img src="img/rua_vizinhanca.png" alt="Rua da Vizinhança" />
+          <div class="gallery-card-body">
+            <h4>Passeio pelo Bairro</h4>
+            <p>Siga as trilhas coloridas para encontrar seus vizinhos e amigos.</p>
           </div>
         </div>
-        
-        <div class="gallery-card glass-card">
-          <div class="gallery-thumb">
-            <img src="img/dialogo_npc_mae.png" alt="Interface de Diálogo" />
-          </div>
-          <div class="gallery-info">
-            <h4>Interface de Diálogo & Legendas</h4>
-            <p>Sistema de diálogos sincronizado com voz gravada e identificação de personagens.</p>
+
+        <div class="gallery-card ink">
+          <img src="img/dialogo_npc_mae.png" alt="Conversando com a Mãe" />
+          <div class="gallery-card-body">
+            <h4>Conversas Divertidas</h4>
+            <p>Converse com seus pais e amigos para aprender dicas valiosas.</p>
           </div>
         </div>
-        
-        <div class="gallery-card glass-card">
-          <div class="gallery-thumb">
-            <img src="img/hospital.png" alt="Cena do Hospital" />
-          </div>
-          <div class="gallery-info">
-            <h4>Hospital e Atendimento (Fase 4)</h4>
-            <p>Urgência do atendimento médico especializado e orientações pós-acidente.</p>
+
+        <div class="gallery-card ink">
+          <img src="img/hospital.png" alt="Atendimento no Hospital" />
+          <div class="gallery-card-body">
+            <h4>Chegada ao Hospital</h4>
+            <p>Descubra quem procurar imediatamente em caso de emergência.</p>
           </div>
         </div>
-        
-        <div class="gallery-card glass-card">
-          <div class="gallery-thumb">
-            <img src="img/hud_indicador_missao.png" alt="HUD do Jogo" />
-          </div>
-          <div class="gallery-info">
-            <h4>HUD e Indicador de Objetivos</h4>
-            <p>Interface minimalista exibindo pontuação em maçãs e progresso das tarefas ativas.</p>
+
+        <div class="gallery-card ink">
+          <img src="img/hud_indicador_missao.png" alt="Missões e Pontos" />
+          <div class="gallery-card-body">
+            <h4>Ganhe Pontos em Maçãs!</h4>
+            <p>Responda às perguntas certas e acumule muitas maçãs no seu contador!</p>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════ ESTRUTURA DAS MISSÕES ══════════ -->
-  <section class="section-padding" id="missoes">
+  <!-- ══════════ CONHEÇA A TURMA ══════════ -->
+  <section class="chars-section" id="turma">
     <div class="container">
-      <span class="section-tag">Jornada Pedagógica</span>
-      <h2 class="section-title">Estrutura das Missões</h2>
+      <span class="badge-tag" style="display: table; margin: 0 auto 12px;">👥 Personagens</span>
+      <h2 class="section-title">Conheça a Turma!</h2>
       <p class="section-desc">
-        A narrativa progride de forma linear através de 4 segmentos pedagógicos fundamentados.
+        Esses são os amigos e familiares que vão te acompanhar ao longo de toda a história.
       </p>
-      
-      <div class="missions-container">
-        
-        <div class="mission-card glass-card">
-          <div class="mission-num">01</div>
-          <div class="mission-content">
-            <h3>Guarda de Brinquedos e Encontro Incial</h3>
-            <p>André aprende que brinquedos espalhados servem de abrigo para escorpiões. O Pai realiza o primeiro quiz sobre perigos da picada e hábitos noturnos do animal.</p>
-          </div>
-          <div>
-            <span class="mission-badge">Conscientização Doméstica</span>
-          </div>
-        </div>
-        
-        <div class="mission-card glass-card">
-          <div class="mission-num">02</div>
-          <div class="mission-content">
-            <h3>Manejo Ambiental no Quintal</h3>
-            <p>Diálogo sobre proliferação de baratas com o vizinho Paulo. O jogador assume o controle do Pai (adulto) para realizar o descarte seguro dos entulhos acumulados.</p>
-          </div>
-          <div>
-            <span class="mission-badge">Supervisão Adulta</span>
-          </div>
-        </div>
-        
-        <div class="mission-card glass-card">
-          <div class="mission-num">03</div>
-          <div class="mission-content">
-            <h3>A Picada e o Minigame da Ambulância</h3>
-            <p>Após a picada no amigo Charlinho, o jogador embarca na ambulância, respondendo a um quiz reativo em tempo de execução para acelerar o deslocamento até o hospital.</p>
-          </div>
-          <div>
-            <span class="mission-badge">Emergência Médica</span>
-          </div>
-        </div>
-        
-        <div class="mission-card glass-card">
-          <div class="mission-num">04</div>
-          <div class="mission-content">
-            <h3>Hospital e Notificação ao Controle de Zoonoses</h3>
-            <p>Recebimento do atendimento hospitalar e notificação ao Agente de Zoonoses municipal para o mapeamento e contenção do foco comunitário.</p>
-          </div>
-          <div>
-            <span class="mission-badge">Cidadania & Zoonoses</span>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
 
-  <!-- ══════════ PERSONAGENS ══════════ -->
-  <section class="section-padding" id="personagens">
-    <div class="container">
-      <span class="section-tag">Elenco do Jogo</span>
-      <h2 class="section-title">Personagens 3D</h2>
-      <p class="section-desc">
-        Conheça os personagens que conduzem a história e interagem com o jogador.
-      </p>
-      
-      <div class="characters-grid">
-        
-        <div class="char-card glass-card">
-          <div class="char-avatar">
+      <div class="chars-grid">
+
+        <div class="char-card ink">
+          <div class="char-img-box">
             <img src="img/personagem_andre.png" alt="André" />
           </div>
           <h4>André</h4>
-          <p>Protagonista (Criança)</p>
+          <p>O Herói da História</p>
         </div>
-        
-        <div class="char-card glass-card">
-          <div class="char-avatar">
-            <img src="img/personagem_pai.png" alt="Pai do André" />
+
+        <div class="char-card ink">
+          <div class="char-img-box">
+            <img src="img/personagem_pai.png" alt="Pai" />
           </div>
           <h4>Pai</h4>
-          <p>Adulto Responsável</p>
+          <p>Ajuda na Limpeza</p>
         </div>
-        
-        <div class="char-card glass-card">
-          <div class="char-avatar">
-            <img src="img/personagem_mae.png" alt="Mãe do André" />
+
+        <div class="char-card ink">
+          <div class="char-img-box">
+            <img src="img/personagem_mae.png" alt="Mãe" />
           </div>
           <h4>Mãe</h4>
-          <p>Orientação Inicial</p>
+          <p>Dá Boas Dicas</p>
         </div>
-        
-        <div class="char-card glass-card">
-          <div class="char-avatar">
+
+        <div class="char-card ink">
+          <div class="char-img-box">
             <img src="img/personagem_paulo.png" alt="Vizinho Paulo" />
           </div>
           <h4>Vizinho Paulo</h4>
-          <p>Manejo Ambiental</p>
+          <p>Sabe Tudo de Quintal</p>
         </div>
-        
-        <div class="char-card glass-card">
-          <div class="char-avatar">
+
+        <div class="char-card ink">
+          <div class="char-img-box">
             <img src="img/personagem_charlinho.png" alt="Charlinho" />
           </div>
           <h4>Charlinho</h4>
-          <p>Vítima da Picada</p>
+          <p>Amigo do André</p>
         </div>
-        
-        <div class="char-card glass-card">
-          <div class="char-avatar">
-            <img src="img/personagem_zoonozes.png" alt="Agente de Zoonoses" />
-          </div>
-          <h4>Agente Zoonoses</h4>
-          <p>Controle Sanitário</p>
-        </div>
-        
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════ DOWNLOAD & OPEN SOURCE HUB ══════════ -->
-  <section class="section-padding" id="download">
+  <!-- ══════════ DOWNLOAD SECTION ══════════ -->
+  <section class="download-section" id="download">
     <div class="container">
-      <div class="tech-box glass-card">
-        <span class="section-tag">Download & Código-Fonte</span>
-        <h2 class="section-title">Acesse o Jogo e a Arquitetura C#</h2>
-        <p class="section-desc" style="max-width: 700px;">
-          O executável pré-compilado está pronto para rodar em computadores de escolas e laboratórios. O código-fonte autoral dos scripts em C# está aberto para auditoria acadêmica.
+      <div class="download-box ink ink-lg">
+        <span class="badge-tag">📦 É 100% Grátis!</span>
+        <h2>Pronto para Começar a Jogar?</h2>
+        <p>
+          Baixe agora mesmo o jogo completo para o seu computador com Windows e comece a se divertir!
         </p>
-        
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px;">
-          <a href="https://drive.google.com/drive/folders/14r3xTIC4eDk6R9fWew7deVN5cl0n1QDD?usp=drive_link" target="_blank" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.05rem;">
-            <span>⬇ Baixar Executável (Windows x86_64)</span>
-          </a>
-          <a href="https://github.com/juniormaniusis/abc_escorpiao" target="_blank" class="btn btn-emerald" style="padding: 16px 36px; font-size: 1.05rem;">
-            <span>💻 Ver Código-Fonte no GitHub ↗</span>
-          </a>
-        </div>
-        
-        <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 12px;">Especificações Técnicas e Tecnologias:</h4>
-        
-        <div class="tech-tags">
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Unity 2022.3 LTS</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> C# (.NET Core)</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Procedural NavMesh A*</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Pattern Factory Method</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Pattern Memento Save System</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Unity Cinemachine & Timeline</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Dialogue System Lua Engine</div>
-          <div class="tech-tag"><span class="tech-tag-icon">❖</span> Licença MIT (Código Autoral)</div>
+
+        <a href="https://drive.google.com/drive/folders/14r3xTIC4eDk6R9fWew7deVN5cl0n1QDD?usp=drive_link" target="_blank" class="btn btn-green" style="font-size: 1.5rem; padding: 20px 40px;">
+          <span>⬇ Baixar o Jogo para Windows (Grátis)</span>
+        </a>
+
+        <div class="download-steps">
+          <div class="step-item">1️⃣ Baixe o arquivo .zip</div>
+          <div class="step-item">2️⃣ Extraia a pasta no seu computador</div>
+          <div class="step-item">3️⃣ Clique em "ABC_Escorpiao.exe" e jogue!</div>
         </div>
       </div>
     </div>
@@ -377,28 +248,8 @@
   <!-- ══════════ FOOTER ══════════ -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3 class="gradient-text">🦂 ABC do Escorpião</h3>
-          <p>
-            Desenvolvido como produto de pesquisa científica e Trabalho de Conclusão de Curso / Mestrado em Ciência da Computação.
-          </p>
-        </div>
-        <div>
-          <h4 style="color: var(--text-main); margin-bottom: 16px;">Links Rápidos</h4>
-          <ul class="footer-links" style="flex-direction: column; gap: 10px;">
-            <li><a href="#visao-geral">Visão Geral</a></li>
-            <li><a href="#galeria">Galeria 3D</a></li>
-            <li><a href="#download">Download do Jogo</a></li>
-            <li><a href="https://github.com/juniormaniusis/abc_escorpiao" target="_blank">Repositório GitHub ↗</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <div>© 2026 Junior Maniusis — Todos os direitos de código autoral reservados.</div>
-        <div>Licença MIT (Scripts C#) • Licença CC-BY 4.0 (Conteúdo Educativo)</div>
-      </div>
+      <h3>🦂 ABC do Escorpião</h3>
+      <p>Um jogo sério educativo dedicado a proteger crianças e famílias!</p>
     </div>
   </footer>
 
