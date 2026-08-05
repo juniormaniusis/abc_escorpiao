@@ -1,0 +1,300 @@
+Database
+Name,Version,Author,Description,Emphasis1,Emphasis2,Emphasis3,Emphasis4
+Dialogos Modo Historia,,,,#ffffffff ---,#ff0000ff ---,#00ff00ff ---,#0000ffff ---
+Global User Script
+
+Actors
+ID,Portrait,AltPortraits,SpritePortrait,AltSpritePortraits,Name,Pictures,Description,IsPlayer,NodeColor,Display Name
+Number,Special,Special,Special,Special,Text,Files,Text,Boolean,Text,Text
+1,,[],,[],André,[],Player principal,True,Blue,
+2,,[],,[],Mãe,[],Mãe do player,False,#d10699ff,
+3,,[],,[],Tutorial,[],Tutorial Inicial,False,Gray,
+4,,[],,[],Pai,[],Pai do  Player,False,#19b90dff,
+7,,[],,[],Paulo,[],O primeiro vizinho do player,False,#dad500ff,Paulo
+8,,[],,[],Atendente do hospital,[],,False,#b66dfaff,Atendente do hospital
+9,,[],,[],Agente de zoonoses,[],,False,#f77d7dff,Agente de zoonoses
+10,,[],,[],Charlinho,[],Menino que toma a picada,False,{{omit}},{{omit}}
+11,,[],,[],Pai do Charlinho,[],Pai do menino que toma a picada,False,#e9982fff,Pai do Charlinho
+12,,[],,[],Pai (Player),[],Quando o jogador assume o controle do pai,True,{{omit}},Pai
+13,,[],,[],André (NPC),[],Quando o André se torna um personagem não jogável.,False,{{omit}},André
+Items
+ID,Name,Pictures,Description,Success Description,Failure Description,State,Is Item,Display Name,Trackable,Track,Entry Count,Entry 2 State,Entry 2,Entry 1,Entry 1 State,Quest2_2.QtdPilhasEntulho,Entry 3 State,Entry 3,Entry 4 State,Entry 4
+Number,Text,Files,Text,Text,Text,Text,Boolean,Text,Boolean,Boolean,Number,Text,Text,Text,Text,Number,Text,Text,Text,Text
+1,Quest1,[],Mamãe pediu para que eu guardasse todos os meus brinquedos na prateleira,Eu guardei todos os brinquedos na prateleira,Ainda não consegui guardar todos os brinquedos na prateleira,unassigned,False,Guarde os Brinquedos,True,True,2,unassigned,[var=Quest1.TotalToysOnShelf]/[var=Quest1.TotalSlots] Brinquedos Guardados,Suba até seu quarto,active,{{omit}},{{omit}},{{omit}},{{omit}},{{omit}}
+4,Quest2,[],"Falar com o vizinho, falar com o pai, assume o controle do pai e então limpa o quintal",,,unassigned,False,Prevenir Escorpiões,True,True,3,unassigned,Peça ajuda do seu pai para limpar o quintal.,"Fale com Paulo, o seu vizinho da frente.",active,0,unassigned,[var=Quest2_2.QtdPilhasEntulhoLimpas]/ [var=Quest2_2.QtdPilhasEntulho] Limpas,{{omit}},{{omit}}
+5,Introducao,[],Apenas a animação da introdução,,,unassigned,False,{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}},{{omit}}
+6,Quest3,[],Acontece a Picada,,,unassigned,False,O que fazer em caso de picada?,True,True,4,unassigned,Vá até o hospital mais próximo!,Convide o Charlinho para brincar.,unassigned,{{omit}},unassigned,Fale com a atendente.,unassigned,Comunique a Zoonozes
+Locations
+ID
+Number
+Variables
+ID,Name,Initial Value,Description,InitialValueType
+Number,Text,Boolean,Text,Text
+10,Quest1.BrinquedosGuardados,False,,Boolean
+1,Quest1.TotalToysOnShelf,0,Quantidades de brinquedos guardadas pelo jogador,Number
+2,Quest1.TotalSlots,3,Quantidades de brinquedos que devem ser guardadas,Number
+3,Tutorial.IndicadorPorta,False,Habilita/Desabilita o indicador de posicao,Boolean
+7,Quest2_2.QtdPilhasEntulho,6,Quantidade de pilhas de entulho a serem limpas,Number
+8,Quest2_2.QtdPilhasEntulhoLimpas,5,Quantidade de pilha de entulho limpa pelo jogador,Number
+15,Quest3_1.StartTimer,False,Start timer counter,Boolean
+12,Quest3_1.FailedMission,False,Choose this option and you'll fail on the mission,Boolean
+13,Quest3_1.SuccessMission,True,This option make possible the mission been successfull,Boolean
+16,Apples.EarnApples,20,Right answer,Number
+17,Apples.LoseApples,-10,Wrong answer,Number
+19,TRILHA.FALAR_COM_VIZINHO1,False,trilha que induz o jogador a falar com o vizinho1,Boolean
+Conversations
+ID,Title,Description,Actor,Conversant,Overrides
+Number,Text,Text,Actor,Actor,JSON
+1,Quest1: Guardar Brinquedos,,1,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+2,Tutorial,Ensina o Jogador sobre os comandos básicos do jogo,1,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+3,CENA1: Encontro com Escorpião,,1,4,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+4,CENA2: Vizinho Alerta Sobre Cuidados com Escorpiões,,1,7,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+5,Quest2: Limpar lixo do quintal,,1,4,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+6,Quest3: Acontece a picada,,1,11,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+7,CENA3: Conversa com atendente do hospital,,1,8,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+8,CENA4: Responder questões agente de zoonoses,,1,9,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+9,Quest2 - Pai fala com André,,4,1,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+10,BARK_ENTULHO,,1,11,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""emTagForOldResponses"":0,""emTagForInvalidResponses"":0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+DialogueEntries
+entrytag,ConvID,ID,Actor,Conversant,Title,MenuText,DialogueText,IsGroup,FalseConditionAction,ConditionPriority,Conditions,Script,Sequence,Description,Response Menu Sequence,EventGuid,canvasRect
+Text,Number,Number,Number,Number,Text,Text,Text,Boolean,Special,Special,Text,Text,Text,Text,Text,Text,Text
+André_1_0,1,0,1,2,START,,,False,Block,Normal,,,None(),,,,336;48
+Mãe_1_1,1,1,2,1,,,Você pode ir depois que organizar seus brinquedos. Vá até seu quarto e guarde os brinquedos na prateleira.,False,Block,Normal,"CurrentQuestState(""Quest1"") == ""unassigned""","SetQuestState(""Quest1"", ""active"")",AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,72;216
+Mãe_1_2,1,2,2,1,,,Termine de guardar seus brinquedos antes de sair para brincar.,False,Block,Normal,"CurrentQuestState(""Quest1"") == ""active"" and (Variable[""Quest1.TotalToysOnShelf""] < 3)",,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,336;192
+Mãe_1_9,1,9,2,1,,,"Sim, pode ir brincar lá fora.",False,Block,Normal,"Variable[""Quest1.TotalToysOnShelf""] >= Variable[""Quest1.TotalSlots""]","SetQuestState(""Quest1"", ""success"");\nSetQuestState(""Quest2"", ""active"");\nSetQuestEntryState(""Quest2"", 1, ""active"");",AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,600;192
+André_1_10,1,10,1,2,,,Mamãe! Posso ir brincar lá fora? [auto],False,Block,Normal,,AllowMovement(false);,"AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,336;120
+André_1_11,1,11,1,2,,,,False,Block,Normal,,"AllowMovement(true);\nShowAlert(""Suba até seu quarto!"");",,,{{omit}},{{omit}},96;288
+André_1_12,1,12,1,2,,,,False,Block,Normal,,AllowMovement(true);,,,{{omit}},{{omit}},312;288
+André_1_13,1,13,1,2,,,,False,Block,Normal,,"AllowMovement(true);\nShowAlert(""Saia de casa e fale com seu vizinho !"");",,,{{omit}},{{omit}},600;264
+André_2_0,2,0,1,2,START,,,False,Block,Normal,,,None(),,,,80;50
+Tutorial_2_1,2,1,3,2,,,Aqui começa a sua aventura!,False,Block,Normal,,,,,,,80;134
+Tutorial_2_2,2,2,3,2,,,Mova o mouse para olhar ao redor,False,Block,Normal,,,Continue()@Message(Tutorial.CameraMovement),,,,80;218
+Tutorial_2_3,2,3,3,2,,,Use as teclas WSAD para movimentar o André até a área indicada,False,Block,Normal,,,"SetActive(efeito-porta,true);\nContinue()@Message(Tutorial.PlayerEnterOnDoorZone);",,,,80;386
+Tutorial_2_4,2,4,3,2,,,Excelente!,False,Block,Normal,,,,,,,120;288
+Tutorial_2_6,2,6,3,2,,,"Agora, aperte E olhando para a porta para abri-la",False,Block,Normal,,,"SetActive(efeito-porta,false)@Message(Tutorial.DoorOpen);",,,,80;470
+Tutorial_2_7,2,7,3,2,,,Muito bem!,False,Block,Normal,,,,,,,80;554
+Pai_3_0,3,0,4,4,START,,,False,Block,Normal,,,None(),,,,392;50
+André_3_6,3,6,1,4,,,Nossa! Posso brincar com ele? [auto],False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorPlay(Falando, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}}",,,,456;216
+Pai_3_7,3,7,4,1,,,"Que ideia! Com escorpião não se brinca, é perigoso demais. Pra pegar a gente só usa um pote assim ou uma pinça bem grande, nunca coloca a mão.",False,Block,Normal,,,"required AudioWait(entrytag);\nAnimatorPlay(Head Nod Yes, Andre, 0.4)@0.4;\nAnimatorPlay(Talking,  Father, 0.4);\nrequired SetActive(copo, true)@9;\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};\nrequired AnimatorPlay(Idle, Father, 0.5)@{{end}};",,,,392;302
+André_3_8,3,8,1,4,,,Mas por que não pode chegar perto? [auto],False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorPlay(Falando, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};",,,,392;386
+Pai_3_9,3,9,4,1,,,"Eles podem ser pequenos como uma tampinha, mas a picada tem veneno e dói demais! Como são amarelados e bem espertos, eles se escondem no meio de entulho e costumam sair de noite. Pra uma criança então, o veneno é bem perigoso.",False,Block,Normal,,,"required AudioWait(entrytag); \nAnimatorPlay(Talking, Father,0.5);\nSetActive(copo, false);\nrequired AnimatorPlay(Idle, Father, 0.5)@{{end}};",,\n,,432;480
+André_3_10,3,10,1,4,,,"Caramba, sério?",False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorPlay(Falando, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};",,,,456;552
+Pai_3_11,3,11,4,1,,,"Muito sério! Então se você vir um em qualquer lugar, saia de perto rapidinho e chame um adulto na mesma hora. Combinado?",False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorPlay(Talking, Father,0.5);\nAnimatorPlay(Assustado, Andre, 0.5)@0.2;\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};\nrequired AnimatorPlay(Idle, Father, 0.5)@{{end}};\nSetActive(escorpiao-effect, false);",,,,392;638
+André_3_12,3,12,1,4,,,"Combinado, pai...",False,Block,Normal,,EntregarMacas(10),"AudioWait(entrytag); AnimatorPlay(Head Nod Yes, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};",,,,392;722
+Pai_3_13,3,13,4,1,,,"Ótimo. Então me tira uma dúvida: se você ou algum amiguinho tomar uma picada de escorpião, qual é a primeira coisa que a gente tem que fazer?",False,Block,Normal,,,"AudioWait(entrytag); AnimatorPlay(Talking,  Father, 0.5);\nrequired AnimatorPlay(Idle, Father, 0.5)@{{end}};",,,cbc3dbad-c903-4efb-94da-cd42906fae47,392;806
+Pai_3_14,3,14,4,1,,,"Filho! olha o que eu acabei de achar no seu quarto, é um escorpião!",False,Block,Normal,,AllowMovement(false);,"required CinemachinePriority(CutsceneCamera, 999, cut);\nAudioWait(entrytag);\nAnimatorPlay(Talking, Father,0.3)@0.2;\nrequired SetActive(escorpiao-effect, true);\nrequired SetActive(Father, true); \nrequired SetActive(trigger,false);\nrequired MoveTo(posicao_escorpiao_cutscene, escorpiao-effect, 4)@1;\nrequired AnimatorPlay(Idle, Father , 0.5)@{{end}};",,,{{omit}},392;134
+André_3_15,3,15,1,4,,,Colocar bastante gelo em cima da picada,False,Block,Normal,,RemoverMacas(10),"AudioWait(entrytag); AnimatorPlay(Falando, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};",,{{omit}},{{omit}},184;890
+André_3_16,3,16,1,4,,,Sair correndo pra um hospital ou pronto-socorro.,False,Block,Normal,,EntregarMacas(10),"AudioWait(entrytag); AnimatorPlay(Falando, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};",,{{omit}},{{omit}},456;888
+André_3_17,3,17,1,4,,,Passar uma pomada para picada,False,Block,Normal,,RemoverMacas(10),"AudioWait(entrytag); AnimatorPlay(Falando, Andre, 0.5);\nrequired AnimatorPlay(Parado, Andre, 0.5)@{{end}};",,{{omit}},{{omit}},648;888
+Pai_3_18,3,18,4,1,,,"Nada disso. É melhor não colocar nada em cima da picada. O certo é correr direto pra um hospital ou pronto-socorro.",False,Block,Normal,,,"required AudioWait(entrytag); \nrequired AnimatorPlay(Talking, Father, 0.1);\n",,,{{omit}},184;974
+Pai_3_19,3,19,4,1,,,"Isso mesmo! Tem que ir voando pro hospital mais perto pra ser socorrido logo, e é melhor um Pronto Socorro ou Hospital mesmo, ao invés do postinho de saúde menor.",False,Block,Normal,,,"required AudioWait(entrytag);\nrequired AnimatorPlay(Talking, Father , 0.5);\nrequired AnimatorPlay(Idle, Father, 0.5)@{{end}};",,{{omit}},{{omit}},528;960
+Pai_3_20,3,20,4,1,,,"Exato! Só que no desespero de uma picada, às vezes a gente demora a achar um hospital grande na internet. Você acha melhor a gente continuar procurando ou parar no primeiro pronto-socorro que ver na frente?",False,Block,Normal,,,"required AudioWait(entrytag); AnimatorPlay(Talking, Father, 0.5);\nrequired AnimatorPlay(Idle, Father)@{{end}};",,,{{omit}},184;1058
+André_3_21,3,21,1,4,,,"Parar no primeiro lugar, claro! Lá eles já dão os primeiros socorros.",False,Block,Normal,,EntregarMacas(10),"required AudioWait(entrytag); \nAnimatorPlay(Falando, Andre , 0.5);\nrequired AnimatorPlay(Parado, Andre, )@{{end}};",,{{omit}},{{omit}},80;1142
+André_3_22,3,22,1,4,,,"Continuar procurando. Não adianta nada ir num lugar que não resolve tudo.",False,Block,Normal,,RemoverMacas(10);,"required AudioWait(entrytag);\n AnimatorPlay(Falando, Andre , 0.5);\nrequired AnimatorPlay(Parado, Andre, )@{{end}};",,{{omit}},{{omit}},288;1142
+Pai_3_23,3,23,4,1,,,"Não tem erro! É isso aí.",False,Block,Normal,,,"AudioWait(entrytag); AnimatorPlay(Talking, Father, 0.5);\nAnimatorPlay(Head Nod Yes,Andre , 0.5);\nrequired AnimatorPlay(Idle, Father)@{{end}};",,{{omit}},{{omit}},80;1226
+Pai_3_24,3,24,4,1,,,"Não, aí você errou.",False,Block,Normal,,,"AudioWait(entrytag); AnimatorPlay(Talking, Father, 0.5);\nAnimatorPlay(Head Nod Yes,Andre , 0.5);\nrequired AnimatorPlay(Idle, Father)@{{end}};",,{{omit}},{{omit}},288;1226
+Pai_3_25,3,25,4,1,,,"Quando se trata de escorpião, o relógio corre contra a gente, principalmente com criança! Tem que chegar num hospital em no máximo 1h30. Lá eles dão os primeiros socorros e já mandam o mais rápido possível pro hospital principal de ambulância.",False,Block,Normal,,"ShowAlert(""Guarde seus brinquedos!"");\nSetQuestEntryState(""Quest1"", 1, ""success"");\nSetQuestEntryState(""Quest1"", 2, ""active"")","required AudioWait(entrytag);\nrequired CinemachinePriority(CutsceneCamera, 0, cut)@{{end}};\nrequired SetActive(Cutscene: André encontra com o escorpião, false)@{{end}};\nrequired SetActive(Father, false)@{{end}};\nrequired AnimatorPlay(Parado, Andre)@{{end}};",,{{omit}},{{omit}},72;1296
+André_3_26,3,26,1,4,,,,False,Block,Normal,,"AllowMovement(true);\nShowAlert(""Guarde os seus brinquedos!"");",,,{{omit}},{{omit}},96;1392
+André_4_0,4,0,1,7,START,,,False,Block,Normal,,,None(),,,,184;50
+Paulo_4_1,4,1,7,1,,,"Bom dia, meu jovem! Acabou de se mudar aqui pro lado, né? Eu sou o Paulo, seu vizinho.",False,Block,Normal,"CurrentQuestEntryState(""Quest2"", 2) == ""unassigned""  ",AllowMovement(false);,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,72;120
+André_4_2,4,2,1,7,,,"Oi, seu Paulo! Sim, chegamos agorinha. E dá pra acreditar que acabei de achar um escorpião no meu quarto? [auto]",False,Block,Normal,,"SetQuestEntryState(""Quest2"", 1, ""success"");","AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,80;218
+Paulo_4_3,4,3,7,1,,,"Vixe, é mesmo? Tem muito bicho desses por aqui ultimamente, viu? A turma toda do bairro anda reclamando. E olha, o perigo é grande, já teve gente indo pro hospital.",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,80;302
+André_4_4,4,4,1,7,,,Meu pai avisou pra tomar cuidado... Mas por que tem tanto escorpião por aqui? [auto],False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,80;386
+Paulo_4_5,4,5,7,1,,,"Ah, eles adoram viver perto da gente por causa das baratas! Onde tem barata, tem escorpião caçando elas. Por isso eles se escondem no meio de pedra, entulho de obra, e saem até pelos ralos! Mas, espera aí... Você disse que achou um?",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,80;470
+André_4_6,4,6,1,7,,,"Foi! Tava lá no meu quarto agorinha... [auto]",False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,80;554
+Paulo_4_7,4,7,7,1,,,"Rapaz, será que vocês não têm um 'criadouro' de escorpião escondido aí no quintal?",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,80;638
+André_4_8,4,8,1,7,,,Criadouro de escorpião? Como assim?,False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,80;722
+André_4_9,4,9,1,7,,,"Se eu achar de onde eles estão saindo, peço pro meu pai jogar bastante veneno neles!",False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,80;890
+André_4_10,4,10,1,7,,,E como a gente faz pra espantar esses bichos daqui?,False,Block,Normal,,,"AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,288;1058
+Paulo_4_11,4,11,7,1,,,"Um cantinho escuro onde eles se juntam pra ter filhotes! Qualquer canto do quintal com lixo, resto de tijolo, caixas velhas ou madeira amontoada vira um palácio pra eles.",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,80;806
+Paulo_4_12,4,12,7,1,,,"Nada disso! Veneno de inseto não funciona em escorpião. A única coisa que o veneno faz é deixar eles irritados. Aí eles saem correndo pelo quintal e a chance de picar alguém aumenta!",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,80;974
+Paulo_4_13,4,13,7,1,,,"O segredo é deixar o quintal sempre limpinho, sem entulho! Sabe o que ajuda? Sapo e lagartixa, que comem os escorpiões! E nunca use veneno, porque o veneno não mata escorpião, só faz eles se espalharem pela casa e causar acidentes.",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,288;1142
+André_4_14,4,14,1,7,,,"Legal, seu Paulo! Vou avisar meu pai agora mesmo pra gente dar um jeito no quintal. [f]",False,Block,Normal,,"ShowAlert(""Novo Objetivo: Fale com o seu Pai!"");\nSetQuestEntryState(""Quest2"", 2, ""active"");","AudioWait(entrytag);\nAnimatorTrigger(conversar, , pararDeFalar);\nrequired AnimatorTrigger(pararDeFalar, , conversar)@{{end}};",,,,288;1226
+Paulo_4_15,4,15,7,1,,,"Muito bem! Mas escuta aqui: nada de você tentar limpar sozinho. Mexer em entulho onde pode ter escorpião é trabalho só para os adultos! Deixe que o seu pai cuide disso, combinado?",False,Block,Normal,,"ShowAlert(""Novo Objetivo: Limpe o Quintal!"");\nSetQuestEntryState(""Quest2"", 2, ""active"");\nAllowMovement(true);\n",AudioWait(entrytag);\nAnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,,,288;1310
+Paulo_4_16,4,16,7,1,,,"E aí, já foi falar com o seu pai pra ajudar a limpar esse quintal?\n",False,Block,Normal,"CurrentQuestEntryState(""Quest2"", 2) == ""active""",,AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},312;120
+André_4_17,4,17,1,7,,,,False,Block,Normal,,,,,{{omit}},{{omit}},288;218
+André_5_0,5,0,1,4,START,,,False,Block,Normal,,"SetQuestEntryState(""Quest2"", 2, ""success"");\nAllowMovement(false);",None(),,,,184;50
+André_5_1,5,1,1,4,,,"Pai, temos que limpar o quintal pra evitar escorpiões",False,Block,Normal,,,AudioWait(entrytag);\nAnimatorPlay(Falando);\nrequired AnimatorPlay(Parado)@{{end}}; ,,,,144;192
+Pai_5_2,5,2,4,1,,,"Sim, você tem razão. Agora fique de olho, mas fique longe para evitar que algum escorpião possa chegar perto de você e te pique.",False,Block,Normal,,"SetQuestEntryState(""Quest2"", 3, ""active"");\nAlterarPersonagem(""Pai"");\nAllowMovement(true);\nShowAlert(""Limpe a sujeira do quintal!"");","AudioWait(entrytag);\nAnimatorPlay(Talking);\nrequired CinemachinePriority(VCamEntulho, 999, cut);\nrequired FlipPosition(Pai do André);\nrequired AnimatorPlay(Idle, , 1)@{{end}};\nrequired CinemachinePriority(VCamEntulho, 0, cut)@{{end}};\n\nrequired SetActive(AndreClone, true)@{{end}};\nMoveTo(soccer-ball, Pai do André )@{{end}};",,,,456;192
+André_5_3,5,3,1,4,,,André: Vou procurar!,False,Block,Normal,,"SetQuestState(""Quest2.1"", ""active"")",,,,,92.20679;354.4891
+André_5_4,5,4,1,4,,,Estão aqui na minha mochila,False,Block,Normal,"(Variable[""Quest2_1.BotaColetada""] == true) and (Variable[""Quest2_1.LuvaColetada""] == true)","SetQuestState(""Quest2.1"", ""success"")",,,,,312;336
+Pai_5_5,5,5,4,1,,,"Ótimo! Agora fique de olho, mas fique longe para evitar que algum escorpião possa chegar perto de você e te pique.",False,Block,Normal,,"SetQuestState(""Quest2.2"", ""active"")",,,,,301.4275;438.4891
+André_6_0,6,0,1,11,START,,,False,Block,Normal,,,None(),,,,184;50
+André_6_1,6,1,1,11,,,O escorpião picou o Charlinho! [auto],False,Block,Normal,,"Variable[""Quest3_1.StartTimer""] = true;\nAllowMovement(false);\nSetQuestEntryState(""Quest3"", 1, ""success"");\nSetQuestEntryState(""Quest3"", 2, ""active"");",AudioWait(entrytag),,{{omit}},{{omit}},168;120
+Pai_do_Charlinho_6_2,6,2,11,1,,,Ai meu Deus! Mata esse bicho antes que pique de novo!,False,Block,Normal,,,AudioWait(entrytag);\n,,"Timeline(speed, TimelinePicadaController, 0);\nrequired Timeline(speed, TimelinePicadaController, 1)@Message(ClosedSubtitle)",{{omit}},192;192
+André_6_3,6,3,1,11,,,Temos que matar o escorpião? Mas como?,False,Block,Normal,,,AudioWait(entrytag);,,{{omit}},{{omit}},184;302
+André_6_4,6,4,1,11,,,"Se der, vamos capturar ele e levá-lo junto o mais rápido possível para uma unidade de saúde mais especializada.",False,Block,Normal,,,AudioWait(entrytag);,,{{omit}},{{omit}},184;470
+Pai_do_Charlinho_6_5,6,5,11,1,,,Eu não sei,False,Block,Normal,,,AudioWait(entrytag),,"Timeline(speed, TimelinePicadaController, 0);\nrequired Timeline(speed, TimelinePicadaController, 1)@Message(ClosedSubtitle)",{{omit}},184;386
+Pai_do_Charlinho_6_6,6,6,11,1,,,Mas e se não tiver uma unidade especializada aqui perto?,False,Block,Normal,,,AudioWait(entrytag);,,"Timeline(speed, TimelinePicadaController, 0);\nrequired Timeline(speed, TimelinePicadaController, 1)@Message(ClosedSubtitle)",{{omit}},184;554
+André_6_7,6,7,1,11,,,"Temos que levar para uma unidade especializada, mesmo que longe.",False,Block,Normal,,"Variable[""Quest3_1.SuccessMission""] = true;",AudioWait(entrytag),,{{omit}},{{omit}},80;638
+André_6_8,6,8,1,11,,,Se for muito longe temos que ir pra um pronto socorro ou hospital mais perto.,False,Block,Normal,,"Variable[""Quest3_1.SuccessMission""] = true;",AudioWait(entrytag),,{{omit}},{{omit}},360;648
+Pai_do_Charlinho_6_10,6,10,11,1,,,"Certo, vamos!",False,Block,Normal,,,required AudioWait(entrytag);,,{{omit}},{{omit}},192;744
+André_6_12,6,12,1,11,,,,False,Block,Normal,,"CarregarCena(""Labirinto"");\nAllowMovement(true)",required ShowAlert(Leve a ambulância até o hospital);\nrequired Delay(3)@{{end}};,,{{omit}},{{omit}},192;840
+André_7_0,7,0,1,8,START,,,False,Block,Normal,,,None(),,{{omit}},{{omit}},80;50
+Atendente_do_hospital_7_1,7,1,8,1,,,Parabéns! Você agiu rápido. Se não fosse por você o quadro poderia ser bem mais grave.,False,Block,Normal,,AllowMovement(false);,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},48;120
+André_7_2,7,2,1,8,,,Obrigado! [auto],False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},80;218
+Atendente_do_hospital_7_3,7,3,8,1,,,Toda vez que acontece a picada é importante avisar o setor de controle de vetores. No momento do atendimento o pai ou responsável deve sempre lembrar de avisar que aconteceu a picada,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},80;302
+André_7_4,7,4,1,8,,,Certo,False,Block,Normal,,AllowMovement(true);,required AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},80;386
+Atendente_do_hospital_7_5,7,5,8,1,,,,False,Block,Normal,,"SetQuestEntryState(""Quest3"", 3, ""success"");\nSetQuestEntryState(""Quest3"", 4, ""active"");\nShowAlert(""Notifique a Zoonozes!"")",,,{{omit}},{{omit}},80;470
+André_8_0,8,0,1,9,START,,,False,Block,Normal,,,None(),,{{omit}},{{omit}},392;50
+Agente_de_zoonoses_8_1,8,1,9,1,,,Boa tarde. Em que posso ajudar?,False,Block,Normal,,AllowMovement(false);,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},392;134
+André_8_2,8,2,1,9,,,O que é um setor de controle de vetores?,False,Block,Normal,,,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},392;218
+André_8_3,8,3,1,9,,,Aconteceu uma picada de escorpião.,False,Block,Normal,,,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},392;386
+Agente_de_zoonoses_8_4,8,4,9,1,,,É um departamento que tem como papel fundamental impedir a propagação de doenças e de evitar acidentes causados por animais peçonhentos e venenosos.,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},392;302
+Agente_de_zoonoses_8_5,8,5,9,1,,,Quem foi picado está bem? Já foi atendido? Está tudo certo?,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},392;470
+André_8_6,8,6,1,9,,,"Sim, já foi atendido está bem.",False,Block,Normal,,,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},408;552
+Agente_de_zoonoses_8_7,8,7,9,1,,,"Ótimo! É muito importante lembrar que não se deve mexer na picada ou aplicar qualquer coisa no local. No máximo limpar a picada com água e sabão e correr para o hospital. Se der tempo, capture o escorpião e leve junto no atendimento, caso contrário, corra direto para o atendimento mais próximo.",False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},392;638
+André_8_8,8,8,1,9,,,"Sim, corri o quanto antes para o atendimento mais próximo.",False,Block,Normal,,,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},392;722
+Agente_de_zoonoses_8_9,8,9,9,1,,,"Pelo visto você está sabendo muito bem sobre os escorpiões. Me responda, O escorpião ataca?",False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},392;806
+André_8_10,8,10,1,9,,,Sim. Por isso é importante acabar com os escorpiões próximo de casa.,False,Block,Normal,,RemoverMacas(10);,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},336;864
+André_8_11,8,11,1,9,,,Não. Ele só ferroa pra se defender se alguém encostar nele,False,Block,Normal,,EntregarMacas(20);,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},696;888
+Agente_de_zoonoses_8_12,8,12,9,1,,,Na verdade não.,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);,,{{omit}},{{omit}},288;974
+Agente_de_zoonoses_8_13,8,13,9,1,,,Exatamente,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);,,{{omit}},{{omit}},704;974
+Agente_de_zoonoses_8_15,8,15,9,1,,,Só vai ferroar se pra se defender se alguém encostar nele seja intencionalmente ou sem querer.,False,Block,Normal,,,required AudioWait(entrytag);,,{{omit}},{{omit}},288;1058
+Agente_de_zoonoses_8_16,8,16,9,1,,,"E se o escorpião picar, ele usa todo o veneno de uma vez em uma única picada?",False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},288;1142
+André_8_17,8,17,1,9,,,Sim. No que ele pica já injeta todo o veneno de uma vez.,False,Block,Normal,,RemoverMacas(10);,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},184;1226
+André_8_18,8,18,1,9,,,Não. Ele nunca utiliza todo o veneno de uma vez e pode até usar o veneno numa segunda picada logo em seguida.,False,Block,Normal,,EntregarMacas(20);,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},480;1200
+Agente_de_zoonoses_8_19,8,19,9,1,,,Na verdade não.,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\n,,{{omit}},{{omit}},184;1310
+Agente_de_zoonoses_8_20,8,20,9,1,,,Exatamente,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\n,,{{omit}},{{omit}},496;1310
+Agente_de_zoonoses_8_21,8,21,9,1,,,"Além dele não usar todo veneno na primeira picada, podendo causar um segundo acidente, o escorpião também pode dar uma picada chamada de “picada seca”, ou seja, picar e não usar veneno.",False,Block,Normal,,,required AudioWait(entrytag);,,{{omit}},{{omit}},184;1394
+Agente_de_zoonoses_8_22,8,22,9,1,,,E mais uma pra ver se você está esperto. Sabe me dizer um predador natural dos escorpiões?,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},184;1478
+André_8_23,8,23,1,9,,,A galinha. Já vi gente com galinha no quintal pra pegar os escorpiões.,False,Block,Normal,,RemoverMacas(10);,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},288;1562
+André_8_24,8,24,1,9,,,O Sapo. Já vi num vídeo na internet um sapo comendo uns bichinhos e acho que  come escorpião também.,False,Block,Normal,,EntregarMacas(20);,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},80;1562
+Agente_de_zoonoses_8_25,8,25,9,1,,,Na verdade não.,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\n,,{{omit}},{{omit}},288;1646
+Agente_de_zoonoses_8_26,8,26,9,1,,,Exatamente,False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar);\n,,{{omit}},{{omit}},80;1646
+Agente_de_zoonoses_8_27,8,27,9,1,,,"Muita gente tem galinha no quintal achando que vai pegar os escorpiões. Pode até pegar um ou outro, mas é difícil por que a galinha tem hábitos diurnos enquanto que o escorpião tem hábitos noturnos.",False,Block,Normal,,,required AudioWait(entrytag);,,{{omit}},{{omit}},80;1730
+Agente_de_zoonoses_8_28,8,28,9,1,,,"Além do sapo, lacraias, corujas, camundongos, lagartos, entre outros animais que tenham um hábito mais noturno são ótimos predadores para os escorpiões.",False,Block,Normal,,,required AudioWait(entrytag);\nrequired AnimatorTrigger(Conversar)@{{end}};,,{{omit}},{{omit}},80;1814
+André_8_29,8,29,1,9,,,Legal. Quanta coisa. Obrigado pela informações.,False,Block,Normal,,,AudioWait(entrytag);\nrequired AnimatorTrigger(conversar);\nrequired AnimatorTrigger(pararDeFalar)@{{end}};,,{{omit}},{{omit}},80;1898
+Agente_de_zoonoses_8_30,8,30,9,1,,,De nada. Obrigado novamente por ter vindo até aqui notificar. Vamos inspecionar o local de noite.,False,Block,Normal,,AllowMovement(true);,AudioWait(entrytag),,{{omit}},{{omit}},80;1982
+André_8_31,8,31,1,9,,,,False,Block,Normal,,"CarregarCena(""Conquistas"")",,,{{omit}},{{omit}},80;2066
+André_(NPC)_9_0,9,0,13,12,START,,,False,Block,Normal,,,None(),,{{omit}},{{omit}},184;50
+Pai_(Player)_9_1,9,1,12,13,,,"Sim filho, acabei de limpar o quintal! [f]",False,Block,Normal,"CurrentQuestEntryState(""Quest2"", 3) == ""success""",EntregarMacas(10),Delay(2);,,{{omit}},{{omit}},312;216
+André_(NPC)_9_2,9,2,13,12,,,"Que bom, pai! Assim prevenimos o aparecimento de criadouro de escorpiões! Vou chamar o Charlinho para brincar e contar sobre o escorpião.",False,Block,Normal,,"SetQuestState(""Quest2"", ""success"");\n",,,,{{omit}},336;288
+André_(NPC)_9_3,9,3,13,12,,"Pai, já terminou de limpar o quintal?","Pai, já terminou de limpar o quintal?",False,Block,Normal,,AllowMovement(false);,Delay(2);,,{{omit}},{{omit}},184;134
+Pai_(Player)_9_4,9,4,12,13,,,"Ainda não terminei, vou limpar e já volto! [f]",False,Block,Normal,"CurrentQuestEntryState(""Quest2"", 3) == ""active""",,Delay(2);,,{{omit}},{{omit}},72;192
+André_(NPC)_9_5,9,5,13,12,,,,False,Block,Normal,,AllowMovement(true);,,,{{omit}},{{omit}},80;302
+Pai_(Player)_9_6,9,6,12,13,,,,False,Block,Normal,,"SetQuestState(""Quest3"", ""active"");\nSetQuestEntryState(""Quest3"", 1, ""active"");\nShowAlert(""Vá chamar o Charlinho para brincar!"");\nAllowMovement(true)","required Fade(stay,4)@0;\nSetActive(AndreClone, false)@2;\nTrocarPersonagem(Andre)@3.5;\nrequired Fade(out, 2)@{{end}};",,{{omit}},{{omit}},312;360
+André_10_0,10,0,1,11,START,,,False,Block,Normal,,,None(),,{{omit}},{{omit}},80;50
+André_10_1,10,1,1,-1,,,Meu pai precisa limpar isso aqui!,False,Block,Normal,,,,,{{omit}},{{omit}},80;134
+OutgoingLinks
+OriginConvID,OriginID,DestConvID,DestID,ConditionPriority
+Number,Number,Number,Number,Special
+1,0,1,10,Normal
+1,1,1,11,Normal
+1,2,1,12,Normal
+1,9,1,13,Normal
+1,10,1,1,Normal
+1,10,1,2,Normal
+1,10,1,9,Normal
+2,0,2,1,Normal
+2,1,2,2,Normal
+2,2,2,4,Normal
+2,3,2,6,Normal
+2,4,2,3,Normal
+2,6,2,7,Normal
+3,0,3,14,Normal
+3,6,3,7,Normal
+3,7,3,8,Normal
+3,8,3,9,Normal
+3,9,3,10,Normal
+3,10,3,11,Normal
+3,11,3,12,Normal
+3,12,3,13,Normal
+3,13,3,15,Normal
+3,13,3,16,Normal
+3,13,3,17,Normal
+3,14,3,6,Normal
+3,15,3,18,Normal
+3,16,3,19,Normal
+3,17,3,18,Normal
+3,18,3,20,Normal
+3,19,3,20,Normal
+3,20,3,21,Normal
+3,20,3,22,Normal
+3,21,3,23,Normal
+3,22,3,24,Normal
+3,23,3,25,Normal
+3,24,3,25,Normal
+3,25,3,26,Normal
+4,0,4,1,Normal
+4,0,4,16,Normal
+4,1,4,2,Normal
+4,2,4,3,Normal
+4,3,4,4,Normal
+4,4,4,5,Normal
+4,5,4,6,Normal
+4,6,4,7,Normal
+4,7,4,8,Normal
+4,7,4,9,Normal
+4,7,4,10,Normal
+4,8,4,11,Normal
+4,9,4,12,Normal
+4,10,4,13,Normal
+4,11,4,9,Normal
+4,11,4,10,Normal
+4,12,4,8,Normal
+4,12,4,10,Normal
+4,13,4,14,Normal
+4,14,4,15,Normal
+4,16,4,17,Normal
+5,0,5,1,Normal
+5,1,5,2,Normal
+5,4,5,5,Normal
+6,0,6,1,Normal
+6,1,6,2,Normal
+6,2,6,3,Normal
+6,2,6,4,Normal
+6,3,6,5,Normal
+6,4,6,6,Normal
+6,5,6,4,Normal
+6,6,6,7,Normal
+6,6,6,8,Normal
+6,7,6,10,Normal
+6,8,6,10,Normal
+6,10,6,12,Normal
+7,0,7,1,Normal
+7,1,7,2,Normal
+7,2,7,3,Normal
+7,3,7,4,Normal
+7,4,7,5,Normal
+8,0,8,1,Normal
+8,1,8,2,Normal
+8,1,8,3,Normal
+8,2,8,4,Normal
+8,3,8,5,Normal
+8,4,8,3,Normal
+8,5,8,6,Normal
+8,6,8,7,Normal
+8,7,8,8,Normal
+8,8,8,9,Normal
+8,9,8,10,Normal
+8,9,8,11,Normal
+8,10,8,12,Normal
+8,11,8,13,Normal
+8,12,8,15,Normal
+8,13,8,15,Normal
+8,15,8,16,Normal
+8,16,8,17,Normal
+8,16,8,18,Normal
+8,17,8,19,Normal
+8,18,8,20,Normal
+8,19,8,21,Normal
+8,20,8,21,Normal
+8,21,8,22,Normal
+8,22,8,24,Normal
+8,22,8,23,Normal
+8,23,8,25,Normal
+8,24,8,26,Normal
+8,25,8,27,Normal
+8,26,8,27,Normal
+8,27,8,28,Normal
+8,28,8,29,Normal
+8,29,8,30,Normal
+8,30,8,31,Normal
+9,0,9,3,Low
+9,1,9,2,Normal
+9,2,9,6,Normal
+9,3,9,4,Normal
+9,3,9,1,Normal
+9,4,9,5,Normal
+10,0,10,1,Normal
