@@ -83,7 +83,7 @@ h1, h2, h3, h4 {
 }
 
 .section-title {
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 4vw + 0.7rem, 2.8rem);
   font-weight: 800;
   text-align: center;
   margin-bottom: 12px;
@@ -121,7 +121,7 @@ h1, h2, h3, h4 {
   padding: 16px 32px;
   border-radius: 50px;
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: clamp(1.05rem, 1vw + 0.85rem, 1.3rem);
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
@@ -188,13 +188,13 @@ h1, h2, h3, h4 {
   gap: 10px;
   text-decoration: none;
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: clamp(1.25rem, 2.5vw + 0.7rem, 1.8rem);
   font-weight: 800;
   color: var(--text);
 }
 
 .nav-brand-icon {
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 3vw + 0.8rem, 2.2rem);
 }
 
 .nav-links {
@@ -239,7 +239,7 @@ h1, h2, h3, h4 {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5.5vw + 0.8rem, 3.5rem);
   font-weight: 800;
   color: var(--text);
   margin-bottom: 16px;
@@ -247,7 +247,7 @@ h1, h2, h3, h4 {
 }
 
 .hero-sub {
-  font-size: 1.35rem;
+  font-size: clamp(1.1rem, 1vw + 0.9rem, 1.35rem);
   color: var(--text);
   font-weight: 600;
   margin-bottom: 32px;
@@ -435,7 +435,7 @@ h1, h2, h3, h4 {
 }
 
 .download-box h2 {
-  font-size: 3rem;
+  font-size: clamp(1.9rem, 4.5vw + 0.7rem, 3rem);
   margin-bottom: 16px;
 }
 
@@ -484,4 +484,159 @@ h1, h2, h3, h4 {
 .footer p {
   color: #D1D5DB;
   font-size: 1rem;
+}
+
+/* ─ Variantes de Botão ─ */
+.btn-block {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.1rem;
+  padding: 14px 20px;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+  padding: 16px 36px;
+}
+
+.btn-sm {
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+/* ─ Cards de Download por Plataforma ─
+   min() evita que a coluna force largura maior que o container em telas estreitas */
+.download-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 24px;
+  max-width: 720px;
+  margin: 36px auto 24px;
+}
+
+/* Nunca deixa uma imagem estourar a largura do pai */
+img {
+  max-width: 100%;
+}
+
+/* ══════════ RESPONSIVO: TABLET E CELULAR ══════════ */
+
+@media (max-width: 767px) {
+  body {
+    font-size: 1rem;
+  }
+
+  /* Navbar: empilha marca e links, sem barra fixa comendo a tela */
+  .nav {
+    position: static;
+    padding: 12px 0;
+  }
+
+  .nav .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 16px;
+  }
+
+  .nav-links a {
+    font-size: 1.05rem;
+  }
+
+  /* Espaçamentos menores */
+  .hero {
+    padding: 40px 0 56px;
+  }
+
+  .features-section,
+  .gallery-section,
+  .chars-section,
+  .download-section {
+    padding: 56px 0;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    margin-bottom: 36px;
+  }
+
+  .download-box {
+    padding: 36px 20px;
+  }
+
+  /* Botões ocupam a linha toda: alvo de toque grande */
+  .hero-actions .btn,
+  .btn-lg {
+    width: 100%;
+  }
+
+  .btn-lg {
+    font-size: 1.05rem;
+    padding: 14px 22px;
+  }
+
+  .download-steps {
+    gap: 14px;
+  }
+
+  .step-item {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+
+  .gallery-card img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 380px) {
+  .char-img-box {
+    width: 92px;
+    height: 92px;
+  }
+
+  .feature-icon {
+    font-size: 2.8rem;
+  }
+}
+
+/* Sem efeito de "levantar" em telas de toque: lá o hover fica grudado */
+@media (hover: none) {
+  .ink:hover,
+  .btn-green:hover,
+  .btn-yellow:hover,
+  .btn-sky:hover {
+    transform: none;
+    box-shadow: 5px 5px 0 var(--outline);
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: none;
+  }
+}
+
+/* Respeita quem pediu menos animação no sistema */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ink:hover,
+  .btn:hover,
+  .feature-card:hover .feature-icon {
+    transform: none;
+  }
 }
